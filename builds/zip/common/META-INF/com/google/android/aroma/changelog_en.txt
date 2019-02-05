@@ -1,0 +1,47 @@
+	
+<b>KERNEL INFORMATION:</b>
+
+	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
+	VERSION	: <b><#selectbg_g>v1.0</#></b>
+	DATE	: <b><#selectbg_g>30/01/2019</#></b>
+	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
+
+	<#53a6f4><b>ONLY FOR Galaxy S7</b></#>
+
+
+<b>CHANGELOG:</b>
+
+---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.0 : 30.01.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.0</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.133 ELS</*>
+<*>SELinux : permissive</*>
+<*>Unlocked big CPU 4 cores to 2600MHz</*>
+<*>CPU Freq range : Higher Freq 2600/1586 MHz and Low Freq at 416/338 MHz</*>
+<*>CPU Freq setup : Higher Freq 2080/1586 MHz and Low Freq at 416/338 MHz</*>
+<*>GPU Freq: 260-650MHz Stock</*>
+<*>100% stable, NO RANDOM REBOOTS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Spectrum and profiles not supported</*>
+<*>Wireguard VPN not supported</*>
+<*>Fixed drain battery</*>
+<*>Some CPU governors </*>
+<*>Some of IO Shedulers</*>
+<*>HMP settings : 800/300 and some freq chcnages</*>
+<*>USB charge to 800MHz in normall mode</*>
+<*>USB charge to 900MHz in fast mode</*>
+<*>Added VENO, VEGAS to TCP</*>
+<*>Added CONSERVATIVE GOV for edit</*>
+<*>Added CONSERVATIVE, POWERSAVE and ONDEMAND GOVs</*>
+<*>SELinux Permissive</*>
+<*>INITIAL RELEASE</*>
+----------------------------------------------------------------------------
+
