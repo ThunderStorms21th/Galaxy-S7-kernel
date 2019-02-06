@@ -44,6 +44,7 @@
 <*>Added CONSERVATIVE GOV for edit too</*>
 <*>Added CONSERVATIVE, POWERSAVE and ONDEMAND GOVs</*>
 <*>SELinux Permissive</*>
+<*>Added ArchPower</*>
 <*>The rest like in previous version</*>
 ----------------------------------------------------------------------------
 ---------------------------------------------------------------------------
