@@ -44,6 +44,8 @@
 <*>Added CONSERVATIVE GOV for edit too</*>
 <*>Added CONSERVATIVE, POWERSAVE and ONDEMAND GOVs</*>
 <*>SELinux Permissive</*>
+<*>Added support for F2FS partition</*>
+<*>Added PWM fix</*>
 <*>The rest like in previous version</*>
 ----------------------------------------------------------------------------
 ---------------------------------------------------------------------------
