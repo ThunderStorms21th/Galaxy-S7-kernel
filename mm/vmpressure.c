@@ -47,7 +47,7 @@ static const unsigned long vmpressure_win = SWAP_CLUSTER_MAX * 16;
  * unsuccessful reclaims there were.
  */
 static const unsigned int vmpressure_level_med = 70;
-static const unsigned int vmpressure_level_critical = 92;
+static const unsigned int vmpressure_level_critical = 98;
 
 /*
  * When there are too little pages left to scan, vmpressure() may miss the
