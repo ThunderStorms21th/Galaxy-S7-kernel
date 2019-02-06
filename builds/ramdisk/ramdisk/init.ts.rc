@@ -30,7 +30,7 @@ on boot
 
     # GPU set at max/min freq
     write /sys/devices/14ac0000.mali/max_clock 650
-    write /sys/devices/14ac0000.mali/min_clock 260
+    write /sys/devices/14ac0000.mali/min_clock 112
     write /sys/devices/14ac0000.mali/highspeed_clock 338
     write /sys/devices/14ac0000.mali/highspeed_delay 3
     write /sys/devices/14ac0000.mali/highspeed_load 98
