@@ -3,7 +3,7 @@
 # Thanks to Tkkg1994 and djb77 for the script
 #
 # Thanks to MoRoGoku for the script
-# Kernel Build Script v1.1, modified by ThunderStorms Team
+# Kernel Build Script v1.2, modified by ThunderStorms Team
 #
 
 # SETUP
@@ -41,7 +41,7 @@ DEFCONFIG=exynos8890-herolte_defconfig
 DEFCONFIG_S7EDGE=ts-edge_defconfig
 DEFCONFIG_S7FLAT=ts-flat_defconfig
 
-export K_VERSION="v1.1"
+export K_VERSION="v1.2"
 export K_BASE="U3ERL3"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
