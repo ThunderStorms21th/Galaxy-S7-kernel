@@ -73,7 +73,7 @@ if [ ! -f /data/system/users/0/personalist.xml ]; then
 fi;
 
 # PWMFix (0 = Disabled, 1 = Enabled)
-echo "0" > /sys/class/lcd/panel/smart_on
+echo "1" > /sys/class/lcd/panel/smart_on
 
 # Stock CPU Settings
 echo "2080000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
@@ -90,8 +90,8 @@ echo "25000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-echo "880" > /sys/kernel/hmp/up_threshold
-echo "340" > /sys/kernel/hmp/down_threshold
+echo "700" > /sys/kernel/hmp/up_threshold
+echo "256" > /sys/kernel/hmp/down_threshold
 
 # Stock GPU Settings
 echo "650" > /sys/devices/14ac0000.mali/max_clock
