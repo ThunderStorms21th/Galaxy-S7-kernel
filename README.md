@@ -1,11 +1,11 @@
-# ThundeRStormS "Galaxy S7 (SM-G930F/FD) Oreo kernel"
+# ThundeRStormS "Galaxy S7 (SM-G93X F/FD) Oreo kernel"
 
 # Kernel for Samsung Galaxy S7
-Helping you compile kernels
+Helping you compile kernels.
 
 Kernel Project by Team ThunderStorms
 
-# Credits & Thanksgiving :
+# Credits & Thanks:
 
 - The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
 - Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
