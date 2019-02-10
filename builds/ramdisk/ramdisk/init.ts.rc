@@ -25,8 +25,8 @@ on boot
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 30000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 40000
-    write /sys/kernel/hmp/up_threshold 880
-    write /sys/kernel/hmp/down_threshold 340
+    write /sys/kernel/hmp/up_threshold 700
+    write /sys/kernel/hmp/down_threshold 256
 
     # GPU set at max/min freq
     write /sys/devices/14ac0000.mali/max_clock 650
@@ -38,7 +38,7 @@ on boot
     write /sys/devices/14ac0000.mali/throttling2 419
     write /sys/devices/14ac0000.mali/throttling3 338
     write /sys/devices/14ac0000.mali/throttling4 260
-    write /sys/devices/14ac0000.mali/trippimg 112
+    write /sys/devices/14ac0000.mali/trippimg 260
 
     # I/O sched settings
     write /sys/block/sda/queue/scheduler cfq
