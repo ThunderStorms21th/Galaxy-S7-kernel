@@ -2,8 +2,8 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v1.2</#></b>
-	DATE	: <b><#selectbg_g>7/02/2019</#></b>
+	VERSION	: <b><#selectbg_g>v1.3</#></b>
+	DATE	: <b><#selectbg_g>10/02/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 	<#53a6f4><b>ONLY FOR Galaxy S7/S7 Edge</b></#>
@@ -12,6 +12,23 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.3 : 10.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Flat and Edge versions</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.1</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1 unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.134 ELS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fixed drain battery</*>
+<*>SELinux Permissive</*>
+<*>HMP settings for more stability</*>
+<*>The rest like in previous version v1.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.2 : 7.02.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXU3ERL3</*>
@@ -28,7 +45,7 @@
 <*>Added PWM Flicker Free</*>
 <*>The rest like in previous version v1.1</*>
 ----------------------------------------------------------------------------
----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.1 : 6.02.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXU3ERL3</*>
@@ -48,7 +65,7 @@
 <*>Added ArchPower</*>
 <*>The rest like in previous version</*>
 ----------------------------------------------------------------------------
----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.0 : 30.01.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXU3ERL3</*>
