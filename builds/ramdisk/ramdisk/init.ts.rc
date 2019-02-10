@@ -32,7 +32,7 @@ on boot
     write /sys/devices/14ac0000.mali/max_clock 650
     write /sys/devices/14ac0000.mali/min_clock 112
     write /sys/devices/14ac0000.mali/highspeed_clock 338
-    write /sys/devices/14ac0000.mali/highspeed_delay 3
+    write /sys/devices/14ac0000.mali/highspeed_delay 2
     write /sys/devices/14ac0000.mali/highspeed_load 98
     write /sys/devices/14ac0000.mali/throttling1 546
     write /sys/devices/14ac0000.mali/throttling2 419
