@@ -26,6 +26,7 @@
 <*>Fixed drain battery</*>
 <*>SELinux Permissive</*>
 <*>HMP settings for more stability</*>
+<*>PWM Flicker Free default Turn ON</*>
 <*>The rest like in previous version v1.2</*>
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
