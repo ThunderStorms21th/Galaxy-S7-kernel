@@ -86,7 +86,7 @@ echo "98" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo "98" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 echo "60000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo "60000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-echo "25000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
@@ -97,7 +97,7 @@ echo "256" > /sys/kernel/hmp/down_threshold
 echo "650" > /sys/devices/14ac0000.mali/max_clock
 echo "112" > /sys/devices/14ac0000.mali/min_clock
 echo "338" /sys/devices/14ac0000.mali/highspeed_clock
-echo "3" /sys/devices/14ac0000.mali/highspeed_delay
+echo "2" /sys/devices/14ac0000.mali/highspeed_delay
 echo "98" /sys/devices/14ac0000.mali/highspeed_load
 
 # I/O sched settings
