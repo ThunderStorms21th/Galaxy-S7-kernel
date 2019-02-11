@@ -65,6 +65,9 @@ on boot
     write /sys/kernel/sched/gentle_fair_sleepers 0
     write /sys/kernel/power_suspend/power_suspend_mode 3
 
+    # PWMFix (0 = Disabled, 1 = Enabled)
+    write /sys/class/lcd/panel/smart_on 0
+
     # LMK
     write /sys/module/lowmemorykiller/parameters/minfree "17920,23552,32256,42472,65536,102400"
     

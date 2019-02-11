@@ -73,7 +73,7 @@ if [ ! -f /data/system/users/0/personalist.xml ]; then
 fi;
 
 # PWMFix (0 = Disabled, 1 = Enabled)
-echo "1" > /sys/class/lcd/panel/smart_on
+echo "0" > /sys/class/lcd/panel/smart_on
 
 # Stock CPU Settings
 echo "2080000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
