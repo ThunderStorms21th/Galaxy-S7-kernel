@@ -41,8 +41,8 @@ DEFCONFIG=exynos8890-herolte_defconfig
 DEFCONFIG_S7EDGE=ts-edge_defconfig
 DEFCONFIG_S7FLAT=ts-flat_defconfig
 
-export K_VERSION="v1.3"
-export K_BASE="U3ERL3"
+export K_VERSION="v1.4"
+export K_BASE="U3ESA2"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
 export KBUILD_BUILD_VERSION="1"
