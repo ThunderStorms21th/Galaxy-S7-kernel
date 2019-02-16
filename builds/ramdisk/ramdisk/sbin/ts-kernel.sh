@@ -75,13 +75,18 @@ fi;
 # PWMFix (0 = Disabled, 1 = Enabled)
 echo "0" > /sys/class/lcd/panel/smart_on
 
+# Kernel Panic off
+echo "0" > /proc/sys/kernel/panic
+
 # Stock CPU Settings
 echo "2080000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
 echo "416000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo "338000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo "25000 650000:30000 1066000:45000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "65000 728000:30000 1248000:40000 1560000:45000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "650000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+echo "728000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+echo "30000 650000:30000 1066000:50000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo "65000 728000:30000 1248000:40000 1560000:50000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 echo "98" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo "98" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 echo "60000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
@@ -90,14 +95,14 @@ echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-echo "700" > /sys/kernel/hmp/up_threshold
-echo "256" > /sys/kernel/hmp/down_threshold
+echo "880" > /sys/kernel/hmp/up_threshold
+echo "340" > /sys/kernel/hmp/down_threshold
 
 # Stock GPU Settings
 echo "650" > /sys/devices/14ac0000.mali/max_clock
 echo "112" > /sys/devices/14ac0000.mali/min_clock
 echo "338" /sys/devices/14ac0000.mali/highspeed_clock
-echo "2" /sys/devices/14ac0000.mali/highspeed_delay
+echo "4" /sys/devices/14ac0000.mali/highspeed_delay
 echo "98" /sys/devices/14ac0000.mali/highspeed_load
 
 # I/O sched settings
@@ -110,6 +115,9 @@ echo "0" > /sys/block/mmcblk0/queue/iostats
 
 # LMK
 echo "17920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
+
+# SSWAP
+echo "80" > /proc/sys/vm/swappiness
 
 # Tweaks: Internet Speed
 echo 'cubic' > /proc/sys/net/ipv4/tcp_congestion_control

@@ -131,7 +131,7 @@ on boot
     # write /proc/sys/vm/min_free_order_shift 1
 
 # SSWAP
-    write /proc/sys/vm/swappiness 90
+    write /proc/sys/vm/swappiness 80
 
     # Allow to access debugfs for system:system
     chmod 755 /sys/kernel/debug
@@ -162,7 +162,7 @@ on boot
     write /sys/devices/14ac0000.mali/max_clock 650
     write /sys/devices/14ac0000.mali/min_clock 112
     write /sys/devices/14ac0000.mali/highspeed_clock 338
-    write /sys/devices/14ac0000.mali/highspeed_delay 2
+    write /sys/devices/14ac0000.mali/highspeed_delay 4
     write /sys/devices/14ac0000.mali/highspeed_load 98
 
     # PMS DVFS
@@ -240,10 +240,13 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 
-    # Setting Governor Parameters
+# Kernel Panic off
+    write /proc/sys/kernel/panic 0
+
+#Setting Governor Parameters
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2080000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 416000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "25000 650000:30000 1066000:45000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "30000 650000:30000 1066000:50000"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 60000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 98  
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 650000
@@ -254,7 +257,7 @@ on boot
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1586000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 338000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "65000 728000:30000 1248000:40000 1560000:45000"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "65000 728000:30000 1248000:40000 1560000:50000"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 60000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 98  
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 728000
@@ -266,15 +269,15 @@ on boot
     # Assume HMP uses shared cpufreq policy for all LITTLE CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    write /sys/kernel/hmp/up_threshold 700
-    write /sys/kernel/hmp/down_threshold 256
+    write /sys/kernel/hmp/up_threshold 880
+    write /sys/kernel/hmp/down_threshold 340
 
     chown system system sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq
     chmod 0660 sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq
     chown system system sys/devices/system/cpu/cpufreq/mp-cpufreq/boot_low_freq
     chmod 0660 sys/devices/system/cpu/cpufreq/mp-cpufreq/boot_low_freq
 
-    #MST HW Support
+	#MST HW Support
     setprop ro.mst.support 1
 
     # Cluster1 (Mongoose)
