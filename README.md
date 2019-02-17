@@ -10,6 +10,7 @@ Kernel Project by Team ThunderStorms
 - The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
 - Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
 - @morogoku, @Tkkg1994, @Noxxxious, @farovitus, and @mwilky for help, codes and commits
+- @djb77 for his help and explanation of the compile and configure kernel processing, codes and commits
 - Project: Exynos-Linux-Stable for updated ELS Linux source codes <https://github.com/exynos-linux-stable>
 - @osm0sis for Android Image Kitchen and anykernel2 <https://forum.xda-developers.com/showthread.php?t=2073775>
 
