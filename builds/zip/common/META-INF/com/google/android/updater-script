@@ -70,7 +70,7 @@ if file_getprop("/tmp/aroma/menu.prop", "chk2") == "1" then
 	delete_recursive("/system/priv-app/com.moro.mtweaks*");
 	delete_recursive("/data/app/com.moro.mtweaks*");
 	delete_recursive("/data/data/com.moro.mtweaks*");
-	package_extract_dir("/tmp/ts/apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
+	package_extract_dir("apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
 endif;
 
 
