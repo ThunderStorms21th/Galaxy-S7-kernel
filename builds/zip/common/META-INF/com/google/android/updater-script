@@ -1,8 +1,8 @@
 ui_print("***********************************************");
 ui_print("          ThunderStorm Kernel Oreo             ");
-ui_print("            For Samsung Galaxy S7              ");
-ui_print("    Developed by ThundeRStormS Team            ");
-ui_print("                     TS Team                   ");
+ui_print("             For Samsung Galaxy S7             ");
+ui_print("   Developed by ThundeRStormS Team             ");
+ui_print("                       TS Team                 ");
 ui_print("***********************************************");
 set_progress(0.01);
 
@@ -70,7 +70,7 @@ if file_getprop("/tmp/aroma/menu.prop", "chk2") == "1" then
 	delete_recursive("/system/priv-app/com.moro.mtweaks*");
 	delete_recursive("/data/app/com.moro.mtweaks*");
 	delete_recursive("/data/data/com.moro.mtweaks*");
-	package_extract_dir("ts/apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
+	package_extract_dir("/tmp/ts/apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
 endif;
 
 
