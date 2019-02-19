@@ -3,7 +3,7 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
 	VERSION	: <b><#selectbg_g>v1.4</#></b>
-	DATE	: <b><#selectbg_g>16/02/2019</#></b>
+	DATE	: <b><#selectbg_g>18/02/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 	<#53a6f4><b>ONLY FOR Galaxy S7/S7 Edge</b></#>
@@ -12,20 +12,23 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-O v1.4 : 16.02.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-O v1.4 : 18.02.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXU3ESA2</*>
 <*>Flat and Edge versions</*>
-<*>Almost stock kernel features</*>
+<*>Rebuilt source</*>
+<*>Added Voltage control</*>
 <*>VM, VNSWAP : some settings v1.2</*>
 <*>MTweaks 2.12.6</*>
-<*>Magisk 17.1 official (v18.1 gives random reboots and heat the phone)</*>
+<*>Magisk 18.1 official</*>
 <*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
 <*>Linux 3.18.134 ELS</*>
 <*>compiler : aarch64-linux-android-4.9</*>
 <*>Fixed drain battery</*>
 <*>SELinux Permissive</*>
 <*>Fixed random reboots</*>
+<*>Added Fsync and CRC control</*>
+<*>Added Battery and LED control</*>
 <*>HMP settings for more stability</*>
 <*>PWM Flicker Free default Turn OFF</*>
 <*>Some initial settings : clean codes</*>
