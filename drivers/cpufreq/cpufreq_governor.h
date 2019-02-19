@@ -126,6 +126,7 @@ static void *get_cpu_dbs_info_s(int cpu)				\
  * cdbs: common dbs
  * od_*: On-demand governor
  * cs_*: Conservative governor
+ * ex_*: ElementalX governor
  */
 
 /* Per cpu structures */
@@ -169,6 +170,12 @@ struct cs_cpu_dbs_info_s {
 	unsigned int enable:1;
 };
 
+struct ex_cpu_dbs_info_s {
+	struct cpu_dbs_common_info cdbs;
+	unsigned int down_floor;
+	unsigned int enable:1;
+};
+
 /* Per policy Governors sysfs tunables */
 struct od_dbs_tuners {
 	unsigned int ignore_nice_load;
@@ -185,7 +192,28 @@ struct cs_dbs_tuners {
 	unsigned int sampling_down_factor;
 	unsigned int up_threshold;
 	unsigned int down_threshold;
+	unsigned int down_threshold_suspended;
 	unsigned int freq_step;
+	unsigned int sleep_depth;
+	unsigned int boost_enabled;
+	unsigned int boost_count;
+	unsigned int boost_ceiling;
+	unsigned int input_boost_freq;
+	unsigned int input_boost_duration;
+	unsigned int twostep_threshold;
+	unsigned int min_load;
+	unsigned int twostep_counter;
+	u64 twostep_time;
+};
+
+struct ex_dbs_tuners {
+	unsigned int ignore_nice_load;
+	unsigned int sampling_rate;
+	unsigned int up_threshold;
+	unsigned int down_differential;
+	unsigned int active_floor_freq;
+	unsigned int sampling_down_factor;
+	unsigned int powersave;
 };
 
 /* Common Governor data across policies */
@@ -193,7 +221,8 @@ struct dbs_data;
 struct common_dbs_data {
 	/* Common across governors */
 	#define GOV_ONDEMAND		0
-	#define GOV_CONSERVATIVE	0
+	#define GOV_CONSERVATIVE	1
+	#define GOV_ELEMENTALX		2
 	int governor;
 	struct attribute_group *attr_group_gov_sys; /* one governor - system */
 	struct attribute_group *attr_group_gov_pol; /* one governor - policy */
@@ -208,7 +237,8 @@ struct common_dbs_data {
 	void *(*get_cpu_dbs_info_s)(int cpu);
 	void (*gov_dbs_timer)(struct work_struct *work);
 	void (*gov_check_cpu)(int cpu, unsigned int load);
-	int (*init)(struct dbs_data *dbs_data);
+	int (*init)(struct dbs_data *dbs_data, struct cpufreq_policy *policy);
+	int (*init_ex)(struct dbs_data *dbs_data, struct cpufreq_policy *policy);
 	void (*exit)(struct dbs_data *dbs_data);
 
 	/* Governor specific ops, see below */
@@ -219,6 +249,7 @@ struct common_dbs_data {
 struct dbs_data {
 	struct common_dbs_data *cdata;
 	unsigned int min_sampling_rate;
+	struct cpufreq_frequency_table *freq_table;
 	int usage_count;
 	void *tuners;
 
