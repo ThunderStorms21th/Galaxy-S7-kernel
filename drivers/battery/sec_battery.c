@@ -13,6 +13,10 @@
 #ifdef CONFIG_CCIC_NOTIFIER
 #include <linux/ccic/ccic_notifier.h>
 #endif /* CONFIG_CCIC_NOTIFIER */
+#include <linux/moduleparam.h>
+
+static int wl_polling = 10;
+module_param(wl_polling, int, 0644);
 
 enum {
 	P9220_VOUT_0V = 0,
@@ -34,6 +38,14 @@ enum {
 
 #define SEC_INPUT_VOLTAGE_5V	5
 #define SEC_INPUT_VOLTAGE_9V	9
+
+static unsigned int STORE_MODE_CHARGING_MAX = 90;
+static unsigned int STORE_MODE_CHARGING_MIN = 20;
+
+module_param_named(store_mode_max, STORE_MODE_CHARGING_MAX, uint, S_IWUSR | S_IRUGO);
+module_param_named(store_mode_min, STORE_MODE_CHARGING_MIN, uint, S_IWUSR | S_IRUGO);
+
+const char *charger_chip_name;
 
 bool sleep_mode = false;
 
@@ -1133,7 +1145,7 @@ static bool sec_bat_ovp_uvlo_result(
 			battery->health_check_count = DEFAULT_HEALTH_CHECK_COUNT;
 			/* Take the wakelock during 10 seconds
 			   when over-voltage status is detected	 */
-			wake_lock_timeout(&battery->vbus_wake_lock, HZ * 10);
+			wake_lock_timeout(&battery->vbus_wake_lock, HZ * wl_polling);
 			break;
 		}
 		power_supply_changed(&battery->psy_bat);
@@ -2726,7 +2738,7 @@ static void sec_bat_do_fullcharged(
 	 * activated wake lock in a few seconds
 	 */
 	if (battery->pdata->polling_type == SEC_BATTERY_MONITOR_ALARM)
-		wake_lock_timeout(&battery->vbus_wake_lock, HZ * 10);
+		wake_lock_timeout(&battery->vbus_wake_lock, HZ * wl_polling);
 }
 
 static bool sec_bat_fullcharged_check(
@@ -3505,7 +3517,7 @@ static void sec_bat_fw_update_work(struct sec_battery_info *battery, int mode)
 
 	dev_info(battery->dev, "%s \n", __func__);
 
-	wake_lock_timeout(&battery->vbus_wake_lock, HZ * 10);
+	wake_lock_timeout(&battery->vbus_wake_lock, HZ * wl_polling);
 
 	switch (mode) {
 		case SEC_WIRELESS_RX_SDCARD_MODE:
@@ -3988,7 +4000,7 @@ static void sec_bat_cable_work(struct work_struct *work)
 	 * if cable is connected and disconnected,
 	 * activated wake lock in a few seconds
 	 */
-	wake_lock_timeout(&battery->vbus_wake_lock, HZ * 10);
+	wake_lock_timeout(&battery->vbus_wake_lock, HZ * wl_polling);
 
 	if (battery->cable_type == POWER_SUPPLY_TYPE_BATTERY ||
 		((battery->pdata->cable_check_type &
@@ -5203,24 +5215,14 @@ ssize_t sec_bat_store_attrs(
 		break;
 	case STORE_MODE:
 		if (sscanf(buf, "%d\n", &x) == 1) {
-#if !defined(CONFIG_SEC_FACTORY)
-			if (x) {
-				if (!battery->store_mode) {
-					battery->pdata->wpc_high_temp -= 30;
-					battery->pdata->wpc_high_temp_recovery -= 30;
-				}	
-				battery->store_mode |= STORE_MODE_LDU_RDU;
-				if(battery->capacity <= 5) {
-					battery->ignore_store_mode = true;
-				} else {
-					if(battery->cable_type == POWER_SUPPLY_TYPE_HV_MAINS || \
-						battery->cable_type == POWER_SUPPLY_TYPE_HV_MAINS_12V ||
-						battery->cable_type == POWER_SUPPLY_TYPE_HV_ERR)
-						sec_bat_set_charging_current(battery);
-				}
-			}
-#endif
+			battery->store_mode = x ? true : false;
 			ret = count;
+			if (battery->store_mode) {
+				union power_supply_propval value;
+				value.intval = battery->store_mode;
+				psy_do_property(battery->pdata->charger_name, set,
+						POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX, value);
+			}
 		}
 		break;
 	case UPDATE:
@@ -6167,13 +6169,7 @@ static int sec_bat_get_property(struct power_supply *psy,
 					return 0;
 				}
 			}
-#if defined(CONFIG_STORE_MODE)
-			if (battery->store_mode && !lpcharge &&
-					battery->cable_type != POWER_SUPPLY_TYPE_BATTERY &&
-					battery->status == POWER_SUPPLY_STATUS_DISCHARGING) {
-				val->intval = POWER_SUPPLY_STATUS_CHARGING;
-			} else
-#endif
+
 				val->intval = battery->status;
 		}
 		break;
@@ -8170,8 +8166,14 @@ static int sec_battery_probe(struct platform_device *pdev)
 	battery->cable_type = POWER_SUPPLY_TYPE_BATTERY;
 	battery->test_mode = 0;
 	battery->factory_mode = false;
+#if defined(CONFIG_STORE_MODE)
+	battery->store_mode = false;
+	value.intval = battery->store_mode;
+	psy_do_property(battery->pdata->charger_name, set,
+			POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX, value);
+#else
 	battery->store_mode = STORE_MODE_NONE;
-	battery->ignore_store_mode = false;
+#endif
 	battery->slate_mode = false;
 	battery->is_hc_usb = false;
 
@@ -8373,15 +8375,6 @@ static int sec_battery_probe(struct platform_device *pdev)
 	psy_do_property(battery->pdata->wireless_charger_name, set,
 					POWER_SUPPLY_PROP_CHARGE_TYPE, value);
 
-#if defined(CONFIG_STORE_MODE) && !defined(CONFIG_SEC_FACTORY)
-	battery->store_mode |= STORE_MODE_LDU_RDU;
-	if (battery->capacity <= 5)
-		battery->ignore_store_mode = true;
-
-	battery->pdata->wpc_high_temp -= 30;
-	battery->pdata->wpc_high_temp_recovery -= 30;
-#endif
-
 #if defined(CONFIG_MUIC_NOTIFIER)
 	muic_notifier_register(&battery->batt_nb,
 			       batt_handle_notification,
@@ -8427,6 +8420,9 @@ static int sec_battery_probe(struct platform_device *pdev)
 
 	dev_info(battery->dev,
 		"%s: SEC Battery Driver Loaded\n", __func__);
+	
+	charger_control_init(battery);
+
 	return 0;
 
 err_req_irq:
