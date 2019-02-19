@@ -131,7 +131,7 @@ on boot
     # write /proc/sys/vm/min_free_order_shift 1
 
 # SSWAP
-    write /proc/sys/vm/swappiness 80
+    write /proc/sys/vm/swappiness 100
 
     # Allow to access debugfs for system:system
     chmod 755 /sys/kernel/debug
@@ -162,8 +162,8 @@ on boot
     write /sys/devices/14ac0000.mali/max_clock 650
     write /sys/devices/14ac0000.mali/min_clock 112
     write /sys/devices/14ac0000.mali/highspeed_clock 338
-    write /sys/devices/14ac0000.mali/highspeed_delay 4
-    write /sys/devices/14ac0000.mali/highspeed_load 98
+    write /sys/devices/14ac0000.mali/highspeed_delay 3
+    write /sys/devices/14ac0000.mali/highspeed_load 97
 
     # PMS DVFS
     chown system system /sys/power/cpuhotplug/enabled
@@ -246,31 +246,31 @@ on boot
 #Setting Governor Parameters
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2080000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 416000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "30000 650000:30000 1066000:50000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "25000 650000:40000 1066000:40000"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 60000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 98  
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 650000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 754000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 60000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 1066000:85"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 30000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 30000
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1586000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 338000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "65000 728000:30000 1248000:40000 1560000:50000"
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "60000 728000:40000 1248000:40000 1560000:40000"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 60000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 98  
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 728000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 832000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 60000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "80 1040000:81 1352000:87 1664000:90"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 40000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 30000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 30000
 
     # Assume HMP uses shared cpufreq policy for all LITTLE CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    write /sys/kernel/hmp/up_threshold 880
-    write /sys/kernel/hmp/down_threshold 340
+    write /sys/kernel/hmp/up_threshold 800
+    write /sys/kernel/hmp/down_threshold 300
 
     chown system system sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq
     chmod 0660 sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq

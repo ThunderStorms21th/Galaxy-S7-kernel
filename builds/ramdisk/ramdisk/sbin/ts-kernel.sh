@@ -61,8 +61,8 @@ done;
 for i in `ls /sys/class/scsi_disk/`; do
 	cat /sys/class/scsi_disk/$i/write_protect 2>/dev/null | grep 1 >/dev/null
 	if [ $? -eq 0 ]; then
-		su -c 'echo 'temporary none' > /sys/class/scsi_disk/$i/cache_type'
-	fi;
+		echo 'temporary none' > /sys/class/scsi_disk/$i/cache_type
+	fi
 done;
 
 # Fix personalist.xml
@@ -83,27 +83,32 @@ echo "2080000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
 echo "416000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo "338000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo "650000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo "728000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-echo "30000 650000:30000 1066000:50000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "65000 728000:30000 1248000:40000 1560000:50000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "754000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+echo "832000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+echo "25000 600000:40000 1066000:40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo "60000 728000:40000 1248000:40000 1560000:40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 echo "98" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo "98" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 echo "60000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo "60000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-echo "880" > /sys/kernel/hmp/up_threshold
-echo "340" > /sys/kernel/hmp/down_threshold
+echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
+
+# HMP settings
+echo "800" > /sys/kernel/hmp/up_threshold
+echo "300" > /sys/kernel/hmp/down_threshold
+echo "1066000" > /sys/kernel/hmp/down_compensation_high_freq
+echo "858000" > /sys/kernel/hmp/down_compensation_mid_freq
+echo "754000" > /sys/kernel/hmp/down_compensation_low_freq
 
 # Stock GPU Settings
 echo "650" > /sys/devices/14ac0000.mali/max_clock
 echo "112" > /sys/devices/14ac0000.mali/min_clock
 echo "338" /sys/devices/14ac0000.mali/highspeed_clock
-echo "4" /sys/devices/14ac0000.mali/highspeed_delay
-echo "98" /sys/devices/14ac0000.mali/highspeed_load
+echo "3" /sys/devices/14ac0000.mali/highspeed_delay
+echo "97" /sys/devices/14ac0000.mali/highspeed_load
 
 # I/O sched settings
 echo 'cfq' > /sys/block/sda/queue/scheduler
@@ -117,7 +122,7 @@ echo "0" > /sys/block/mmcblk0/queue/iostats
 echo "17920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
 
 # SSWAP
-echo "80" > /proc/sys/vm/swappiness
+echo "100" > /proc/sys/vm/swappiness
 
 # Tweaks: Internet Speed
 echo 'cubic' > /proc/sys/net/ipv4/tcp_congestion_control
