@@ -82,26 +82,30 @@ The marked options are recommended.
 menu.group1=Root Options
 menu.1=Without root
 menu.1desc=Recommended if you are installing another type of root on your own.
-menu.2=Magisk 18.1
+menu.2=Magisk 18.1 Unoffical
 menu.2desc=Magisk Manager with Root integrated.
 menu.5=SuperSU 2.82-SR5 + SuHide 1.09
 menu.5desc=Famous Root of Chainfire.
+menu.12=Kernel for ported or deodexed rom
+menu.12desc=Select this if You have ported or deodexed rom
 menu.group2=Other options
-menu.3=MTweaks v2.12.6
+menu.3=MTweaks v2.13
 menu.3desc=Application for kernel management modified by MoRoGoKu
 menu.4=Busybox
 menu.4desc=Busybox 1.27.2\
 Necessary. Uncheck only if you have a higher version.
-#menu.6=Spectrum
-#menu.6desc=Simple app for the management of 4 predefined profiles, Balanced, Battery, Performance and Gaming.
+menu.6=Spectrum (TS) Profiles
+menu.6desc=Simple way for the management of 4 predefined profiles, Balanced, Battery, Performance and Gaming. Copied to sdcard/Spectrum/profiles.
 menu.7=Delete root data
 menu.7desc=Data and app will be deleted from the previous root. Recommended for clean installation.
 menu.8=Recovery TWRP 3.2.3-0 Fixed by Tkkg1994
 menu.8desc=Updated by Tkkg1994. Necessary for the kernel.
 menu.9=Fix Private Mode (Stock Roms) by MoRoGoKu
-menu.9desc=Only with S7 Stock based Roms
-#menu.10=Spectrum Profiles - not supported yet
-#menu.10desc=Copy in sdcard/Spectrum/profiles
+menu.9desc=Only with S7 Stock based Roms | is not for ported or deodexed ROMs
+menu.10=Patch for deodexed and ported roms
+menu.10desc=This will patch ported and deodexed roms
+#menu.11=Spectrum Profiles - not supported yet
+#menu.11desc=Copy in sdcard/TSProfiles/profiles
 
 # Root
 stock.title=Without root

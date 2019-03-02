@@ -1,16 +1,18 @@
-ui_print("***********************************************");
-ui_print("          ThunderStorm Kernel Oreo             ");
-ui_print("             For Samsung Galaxy S7             ");
-ui_print("   Developed by ThundeRStormS Team             ");
-ui_print("                       TS Team                 ");
-ui_print("***********************************************");
+ui_print("*******************************************************************");
+ui_print("                     ThunderStorm Kernel Oreo                     ");
+ui_print("                       For Samsung Galaxy S7                      ");
+ui_print("              Developed by ThundeRStormS Team                     ");
+ui_print("                                  TS Team                         ");
+ui_print("*******************************************************************");
 set_progress(0.01);
 
 # Thanks to @MoRoGoKu for oryginal script
 
 # Copy scripts
 package_extract_dir("ts", "/tmp/ts");
+package_extract_dir("ts", "/tmp/tsk");
 set_perm_recursive(0, 0, 0777, 0777, "/tmp/ts");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/tsk");
 
 
 # Prepare partitions
@@ -23,31 +25,31 @@ if is_mounted("/data") == "/data" then
 endif;
 	
 ui_print(" ");
-ui_print("@Mounting partitions");
+ui_print("@Mounting partitions...");
 run_program("/sbin/mount", "/system");
 run_program("/sbin/mount", "/data");
 
 
 ui_print(" ");
-ui_print("@Flashing kernel");
+ui_print("@Flashing kernel...");
 if is_substring("G935", getprop("ro.boot.bootloader")) then
-	ui_print("-- G935 S7 Edge");
+	ui_print("-- G935 S7 Edge...");
 	run_program("/tmp/ts/flash_kernel.sh", "G935");
-	ui_print("-- Done");
+	ui_print("-- Done.");
 endif;
 	
 if is_substring("G930", getprop("ro.boot.bootloader")) then
-	ui_print("-- G930 S7 Flat");
+	ui_print("-- G930 S7 Flat...");
 	run_program("/tmp/ts/flash_kernel.sh", "G930");
-	ui_print("-- Done");
+	ui_print("-- Done.");
 endif;
 
 
 ui_print(" ");
-ui_print("@Patching /system");
+ui_print("@ThundeRStormS - System Patching...");
 package_extract_dir("ts/system", "/system");
-run_program("/tmp/ts/del_wakelock.sh");
-
+run_program("/tmp/ts/del_wakelock.sh");  
+run_program("/tmp/ts/tskernel.sh");
 
 ####################################################
 # OTHER OPTIONS
@@ -56,28 +58,50 @@ run_program("/tmp/ts/del_wakelock.sh");
 # Private mode
 if file_getprop("/tmp/aroma/menu.prop", "chk9") == "1" then
 	ui_print(" ");
-	ui_print("@Fix Private Mode");
+	ui_print("@Fix for Private Mode...");
 	run_program("/tmp/ts/privatemode.sh");
 	package_extract_dir("ts/private_mode", "/system");
 endif;
 
 
 # MTweaks
-if file_getprop("/tmp/aroma/menu.prop", "chk2") == "1" then
+if file_getprop("/tmp/aroma/menu.prop", "chk3") == "1" then
 	ui_print(" ");
-	ui_print("@MTWeaks App");
+	ui_print("@Installing MTWeaks App...");
 	delete_recursive("/system/app/com.moro.mtweaks*");
 	delete_recursive("/system/priv-app/com.moro.mtweaks*");
 	delete_recursive("/data/app/com.moro.mtweaks*");
 	delete_recursive("/data/data/com.moro.mtweaks*");
+	run_program("/tmp/ts/ts_clean.sh", "com.moro.mtweaks", "-as");
 	package_extract_dir("apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
 endif;
 
+# Patch for deodexed and ported roms
+if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
+	
+	ui_print("@Patching system for ported and deodexed roms");
+	ui_print(" ");
+	package_extract_dir("tsk", "/tmp/tsk");
+	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.1.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
+	run_program("/sbin/sh", "/tmp/tsk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/tsk/TS-kernel-deodexed-v1.1.zip");
+	delete_recursive("/tmp/tsk");
+	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
+	run_program("/sbin/sh", "/tmp/tsk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip");
+	delete_recursive("/tmp/tsk");
+endif;
+
+# TS kernel Profiles
+if file_getprop("/tmp/aroma/menu.prop", "chk6") == "1" then
+	ui_print(" ");
+	ui_print("@Install ThundeRStormS kernel Profiles...");
+	run_program("/tmp/ts/tskernel2.sh");
+	package_extract_dir("ts/profiles", "/data/media/0/Spectrum/profiles/");
+endif;
 
 # Recovery
 if file_getprop("/tmp/aroma/menu.prop", "chk8") == "1" then
 	ui_print(" ");
-	ui_print("@Flashing patched recovery TWRP 3.2.3-0 by Tkkg1994");
+	ui_print("@Flashing patched recovery TWRP 3.2.3-0 by Tkkg1994...");
 	if is_substring("G935", getprop("ro.boot.bootloader")) then
 		ui_print("-- G935 S7 Edge");
 		run_program("/tmp/ts/flash_recovery.sh", "G935");
@@ -91,9 +115,8 @@ if file_getprop("/tmp/aroma/menu.prop", "chk8") == "1" then
 	endif;
 endif;
 
-
 ui_print(" ");
-ui_print("@Setting Permissions");
+ui_print("@Setting Permissions...");
 set_metadata("/system/vendor/lib/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata("/system/vendor/lib64/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata("/system/vendor/lib/egl/libGLES_mali.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
@@ -117,7 +140,7 @@ if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt1" then
 
 	ui_print("-- Without Root");
 	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
-		ui_print("-- Clear root data");
+		ui_print("-- Clear root data...");
 		run_program("/tmp/ts/clean_supersu.sh");
 		run_program("/tmp/ts/clean_magisk.sh");
 		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
@@ -136,12 +159,12 @@ show_progress(0.85, "-19000");
 	run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
 
 	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
-		ui_print("-- Clearing root data");
+		ui_print("-- Clearing root data...");
 		run_program("/tmp/ts/clean_magisk.sh");
 		run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
 	endif;
 		
-	ui_print("-- Rooting with Magisk Manager");
+	ui_print("-- Rooting with Magisk Manager...");
 	ui_print(" ");
 	package_extract_dir("magisk", "/tmp/magisk");
 	run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");
@@ -158,7 +181,7 @@ show_progress(0.85, "-34000");
 	run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
 
 	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
-		ui_print("-- Clearing root data");
+		ui_print("-- Clearing root data...");
 		run_program("/tmp/ts/clean_supersu.sh");
 		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
 		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
@@ -166,14 +189,14 @@ show_progress(0.85, "-34000");
 
 	run_program("/tmp/ts/supersu.sh");
 	
-	ui_print("-- Rooting with SuperSU");
+	ui_print("-- Rooting with SuperSU...");
 	package_extract_dir("supersu", "/tmp/supersu");
 	run_program("/sbin/busybox", "unzip", "/tmp/supersu/supersu.zip", "META-INF/com/google/android/*", "-d", "/tmp/supersu");
 	run_program("/sbin/sh", "/tmp/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/supersu/supersu.zip");
 	delete_recursive("/tmp/supersu");
 
 	ui_print(" ");
-	ui_print("-- Suhide");
+	ui_print("-- Installing Suhide...");
 	package_extract_dir("suhide", "/tmp/suhide");
 	run_program("/sbin/busybox", "unzip", "/tmp/suhide/suhide.zip", "META-INF/com/google/android/*", "-d", "/tmp/suhide");
 	run_program("/sbin/sh", "/tmp/suhide/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/suhide/suhide.zip");
@@ -183,11 +206,13 @@ endif;
 #####################################################
 
 ui_print(" ");
-ui_print("-- Unmounting Partition");
+ui_print("-- Unmounting Partition...");
 ifelse(is_mounted("/system"), unmount("/system"));
 
 set_progress(1.00);
 ui_print(" ");
-ui_print("** The ThundeRStormS kernel and mods are installed **");
+ui_print("*******************************************************************");
+ui_print("***  The ThundeRStormS kernel and mods are installed  ***");
+ui_print("*******************************************************************");
 ui_print(" ");
 

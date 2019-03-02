@@ -71,9 +71,6 @@ static inline void set_fs(mm_segment_t fs)
 {
 	current_thread_info()->addr_limit = fs;
 
-	/* On user-mode return, check fs is correct */
-	set_thread_flag(TIF_FSCHECK);
-
 	/*
 	 * Enable/disable UAO so that copy_to_user() etc can access
 	 * kernel memory with the unprivileged instructions.
@@ -144,8 +141,10 @@ static inline void __uaccess_ttbr0_disable(void)
 	ttbr = read_sysreg(ttbr1_el1);
 	ttbr &= ~TTBR_ASID_MASK;
 	/* reserved_ttbr0 placed at the end of swapper_pg_dir */
+
 	write_sysreg(ttbr + SWAPPER_DIR_SIZE, ttbr0_el1);
 	isb();
+
 	/* Set reserved ASID */
 #ifdef CONFIG_REMOVE_M1_TLBI_ERRATUM_FOR_TVM
 	write_sysreg(ttbr, ttbr1_el1);

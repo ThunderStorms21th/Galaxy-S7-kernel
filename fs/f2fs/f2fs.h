@@ -180,7 +180,7 @@ static inline void bio_set_op_attrs(struct bio *bio, unsigned op,
 static inline int wbc_to_write_flags(struct writeback_control *wbc)
 {
 	if (wbc->sync_mode == WB_SYNC_ALL)
-		return REQ_SYNC;
+		return WRITE_SYNC;
 	return 0;
 }
 
@@ -218,9 +218,9 @@ static inline void inode_unlock(struct inode *inode)
  *
  * Please refer to the comment for waitqueue_active.
  */
-static inline bool wq_has_sleeper(wait_queue_head_t *wq)
+static inline bool wq_has_sleeper(wait_queue_head_t *wq) 
 {
-	/*
+	/*   
 	 * We need to be sure we are in sync with the
 	 * add_wait_queue modifications to the wait queue.
 	 *
@@ -234,6 +234,11 @@ static inline bool wq_has_sleeper(wait_queue_head_t *wq)
 static inline struct dentry *file_dentry(const struct file *file)
 {
 	return file->f_path.dentry;
+}
+
+static inline void inode_nohighmem(struct inode *inode)
+{
+	mapping_set_gfp_mask(inode->i_mapping, GFP_USER);
 }
 
 /**
@@ -252,8 +257,8 @@ static inline struct timespec current_time(struct inode *inode)
 
 	if (unlikely(!inode->i_sb)) {
 		WARN(1, "current_time() called with uninitialized super_block in the inode");
-		return now;
-	}
+		return now; 
+	}    
 
 	return timespec_trunc(now, inode->i_sb->s_time_gran);
 }
@@ -295,6 +300,7 @@ struct cp_control {
 	__u64 trim_start;
 	__u64 trim_end;
 	__u64 trim_minlen;
+	__u64 trimmed;
 };
 
 /*

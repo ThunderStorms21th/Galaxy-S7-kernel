@@ -2,8 +2,8 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v1.4</#></b>
-	DATE	: <b><#selectbg_g>18/02/2019</#></b>
+	VERSION	: <b><#selectbg_g>v1.5</#></b>
+	DATE	: <b><#selectbg_g>1/03/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 	<#53a6f4><b>ONLY FOR Galaxy S7/S7 Edge</b></#>
@@ -11,15 +11,64 @@
 
 <b>CHANGELOG:</b>
 
+
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-O v1.4 : 18.02.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-O v1.5 : 1.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Support deodexed and ported roms | not sure 100% works</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Unlocked big CPU 4 cores to 2600MHz</*>
+<*>Big CPU max at 2080MHz</*>
+<*>Little CPU max at 1378MHz</*>
+<*>Fix: No heat and no lags</*>
+<*>Added support for F2FS patition</*>
+<*>Added Wireguard support</*>
+<*>Added Dynamic Fsync and Powersuspend mode</*>
+<*>Added TS profiles for Game, Balanced(TS), Battery(TS), Performance</*>
+<*>VM, VNSWAP : some settings v1.3</*>
+<*>Some changes in initial settings & Input Boost Little CPU</*>
+<*>Removed GPU voltage control</*>
+<*>Removed Battery and Led control</*>
+<*>Support Battery Store control</*>
+<*>Added Fsync and CRC control | default are off</*>
+<*>The rest like in previous version v1.4.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4.2 : 23.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Flat and Edge versions</*>
+<*>Fix: No heat and no lags</*>
+<*>Some changes in initial settings</*>
+<*>The rest like in previous version v1.4.1</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4.1 : 22.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Flat and Edge versions</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.4</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4 : 20.02.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXU3ESA2</*>
 <*>Flat and Edge versions</*>
 <*>Rebuilt source</*>
-<*>Added Voltage control</*>
+<*>Added Voltage control for CPU and GPU</*>
 <*>VM, VNSWAP : some settings v1.2</*>
 <*>MTweaks 2.12.6</*>
+<*>Added some CPU govs and I/O scheds</*>
 <*>Magisk 18.1 official</*>
 <*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
 <*>Linux 3.18.134 ELS</*>
@@ -27,12 +76,14 @@
 <*>Fixed drain battery</*>
 <*>SELinux Permissive</*>
 <*>Fixed random reboots</*>
-<*>Added Fsync and CRC control</*>
+<*>Added Fsync and CRC control | default are off</*>
 <*>Added Battery and LED control</*>
 <*>HMP settings for more stability</*>
 <*>PWM Flicker Free default Turn OFF</*>
 <*>Some initial settings : clean codes</*>
 <*>Fixed kernel panic</*>
+<*>Fix clocksource ABS from 32bit to 64bit</*>
+<*>Added LED and Battery control</*>
 <*>The rest like in previous version v1.3</*>
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------

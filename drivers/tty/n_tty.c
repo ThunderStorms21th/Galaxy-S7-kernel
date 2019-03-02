@@ -2017,8 +2017,8 @@ static int copy_from_read_buf(struct tty_struct *tty,
 		is_eof = n == 1 && read_buf(ldata, tail) == EOF_CHAR(tty);
 		tty_audit_add_data(tty, read_buf_addr(ldata, tail), n,
 				ldata->icanon);
-		smp_store_release(&ldata->read_tail, ldata->read_tail + n);
 		zero_buffer(tty, read_buf_addr(ldata, tail), n);
+		smp_store_release(&ldata->read_tail, ldata->read_tail + n);
 		/* Turn single EOF into zero-length read */
 		if (L_EXTPROC(tty) && ldata->icanon && is_eof &&
 			(head == ldata->read_tail))

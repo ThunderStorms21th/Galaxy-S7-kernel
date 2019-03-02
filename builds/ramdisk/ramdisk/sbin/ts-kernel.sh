@@ -47,7 +47,7 @@ su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeRe
 # init.d
 if [ ! -d /system/etc/init.d ]; then
 	mkdir -p /system/etc/init.d
-fi;
+fi
 chown -R root.root /system/etc/init.d
 chmod -R 755 /system/etc/init.d
 for FILE in /system/etc/init.d/*; do
@@ -76,20 +76,22 @@ fi;
 echo "0" > /sys/class/lcd/panel/smart_on
 
 # Kernel Panic off
-echo "0" > /proc/sys/kernel/panic
+# echo "0" > /proc/sys/kernel/panic
 
 # Stock CPU Settings
 echo "2080000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
 echo "416000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
-echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo "1378000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo "338000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo "754000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo "832000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-echo "25000 600000:40000 1066000:40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "60000 728000:40000 1248000:40000 1560000:40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-echo "98" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo "98" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-echo "60000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+echo "650000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+echo "936000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+echo "25000 650000:30000 1066000:45000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo "65000 936000:30000 1248000:40000 1560000:45000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "85 1066000:90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+echo "80 1040000:81 1352000:87 1664000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+echo "90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+echo "93" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+echo "50000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo "60000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
@@ -97,35 +99,39 @@ echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
 echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
 
 # HMP settings
-echo "800" > /sys/kernel/hmp/up_threshold
-echo "300" > /sys/kernel/hmp/down_threshold
+echo "760" > /sys/kernel/hmp/up_threshold
+echo "240" > /sys/kernel/hmp/down_threshold
 echo "1066000" > /sys/kernel/hmp/down_compensation_high_freq
-echo "858000" > /sys/kernel/hmp/down_compensation_mid_freq
+echo "962000" > /sys/kernel/hmp/down_compensation_mid_freq
 echo "754000" > /sys/kernel/hmp/down_compensation_low_freq
 
 # Stock GPU Settings
 echo "650" > /sys/devices/14ac0000.mali/max_clock
 echo "112" > /sys/devices/14ac0000.mali/min_clock
 echo "338" /sys/devices/14ac0000.mali/highspeed_clock
-echo "3" /sys/devices/14ac0000.mali/highspeed_delay
-echo "97" /sys/devices/14ac0000.mali/highspeed_load
+echo "0" /sys/devices/14ac0000.mali/highspeed_delay
+echo "96" /sys/devices/14ac0000.mali/highspeed_load
 
 # I/O sched settings
 echo 'cfq' > /sys/block/sda/queue/scheduler
-echo "512" > /sys/block/sda/queue/read_ahead_kb
+echo "640" > /sys/block/sda/queue/read_ahead_kb
 echo 'cfq' > /sys/block/mmcblk0/queue/scheduler
 echo "1024" > /sys/block/mmcblk0/queue/read_ahead_kb
 echo "0" > /sys/block/sda/queue/iostats
 echo "0" > /sys/block/mmcblk0/queue/iostats
 
 # LMK
-echo "17920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
+echo "18920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
 
-# SSWAP
-echo "100" > /proc/sys/vm/swappiness
+# SSWAP and Entropy
+echo "80" > /proc/sys/vm/swappiness
+echo "640" > /proc/sys/kernel/random/write_wakeup_threshold
+echo "128" > /proc/sys/kernel/random/read_wakeup_threshold
+echo "500" > /proc/sys/vm/dirty_expire_centisecs
+echo "1000" > /proc/sys/vm/dirty_writeback_centisecs
 
 # Tweaks: Internet Speed
-echo 'cubic' > /proc/sys/net/ipv4/tcp_congestion_control
+echo 'westwood' > /proc/sys/net/ipv4/tcp_congestion_control
 echo "0" > /proc/sys/net/ipv4/tcp_timestamps
 echo "1" > /proc/sys/net/ipv4/tcp_tw_reuse
 echo "1" > /proc/sys/net/ipv4/tcp_sack

@@ -4455,7 +4455,7 @@ no_journal:
 	}
 
 	block = ext4_count_free_clusters(sb);
-	ext4_free_blocks_count_set(sbi->s_es,
+	ext4_free_blocks_count_set(sbi->s_es, 
 				   EXT4_C2B(sbi, block));
 	ext4_superblock_csum_set(sb);
 	err = percpu_counter_init(&sbi->s_freeclusters_counter, block,
@@ -4659,7 +4659,7 @@ static void ext4_init_journal_params(struct super_block *sb, journal_t *journal)
 	part = sb->s_bdev->bd_part;
 	if (part->info && !strncmp(part->info->volname, "USERDATA", 8)) {
 		journal->j_flags |= JBD2_JOURNAL_TAG;
-		printk("Setting journal tag on volname[%s]\n",
+		printk("Setting journal tag on volname[%s]\n", 
 			part->info->volname);
 	} else if (!part->info && journal->j_maxlen >= 32768) {
 		/* maybe dm device &&  journal size > 128MB */

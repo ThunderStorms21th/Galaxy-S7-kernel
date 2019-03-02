@@ -1309,7 +1309,7 @@ static void ffs_data_closed(struct ffs_data *ffs)
 			mdelay(20);
 			functionfs_closed_callback(ffs);
 		}
-
+		
 		ffs_data_reset(ffs);
 	}
 

@@ -6,7 +6,6 @@
 
 on boot
 
- 
 on property:sys.boot_completed=1
 	stop proca
 	stop secure_storage
@@ -15,3 +14,13 @@ on property:sys.boot_completed=1
 	exec u:r:magisk:s0 root root -- /sbin/ts-kernel.sh
 	exec u:r:supersu:s0 root root -- /sbin/ts-kernel.sh
 
+on property:sys.boot_completed=1    
+    start kernelinit
+
+
+service kernelinit /sbin/ts-kernel.sh
+    class late_start
+    user root
+    seclabel u:r:init:s0
+    oneshot
+    disabled

@@ -132,6 +132,7 @@ static int __init init_zero_pfn(void)
 core_initcall(init_zero_pfn);
 
 
+
 #if defined(SPLIT_RSS_COUNTING)
 
 void sync_mm_rss(struct mm_struct *mm)

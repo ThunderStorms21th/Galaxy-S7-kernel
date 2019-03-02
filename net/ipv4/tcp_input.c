@@ -326,7 +326,7 @@ static void tcp_sndbuf_expand(struct sock *sk)
 
 	/* MPTCP: after this sndmem is the new contribution of the
 	 * current subflow to the aggregated sndbuf */
-	if (sk->sk_sndbuf < sndmem)
+	if (sk->sk_sndbuf < sndmem) 
 #ifdef CONFIG_MPTCP
 	{
 		int old_sndbuf = sk->sk_sndbuf;
@@ -835,7 +835,7 @@ static void tcp_update_pacing_rate(struct sock *sk)
  * routine referred to above.
  */
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 void tcp_set_rto(struct sock *sk)
 {
@@ -2588,7 +2588,7 @@ static void tcp_cwnd_reduction(struct sock *sk, const int prior_unsacked,
 	int newly_acked_sacked = prior_unsacked -
 				 (tp->packets_out - tp->sacked_out);
 
-	if (newly_acked_sacked <= 0 || WARN_ON_ONCE(!tp->prior_cwnd))
+	if (newly_acked_sacked <= 0 || WARN_ON_ONCE(!tp->prior_cwnd)) 
 		return;
 
 	tp->prr_delivered += newly_acked_sacked;
@@ -3092,7 +3092,7 @@ void tcp_resume_early_retransmit(struct sock *sk)
 
 /* If we get here, the whole TSO packet has not been acked. */
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 u32 tcp_tso_acked(struct sock *sk, struct sk_buff *skb)
 {
@@ -3317,7 +3317,7 @@ static int tcp_clean_rtx_queue(struct sock *sk, int prior_fackets,
 }
 
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 void tcp_ack_probe(struct sock *sk)
 {
@@ -4278,7 +4278,7 @@ static void tcp_sack_remove(struct tcp_sock *tp)
  * Returns true if caller should free @from instead of queueing it
  */
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 bool tcp_try_coalesce(struct sock *sk,
 			     struct sk_buff *to,
@@ -4335,9 +4335,9 @@ static void tcp_ofo_queue(struct sock *sk)
 		/* In case of MPTCP, the segment may be empty if it's a
 		 * non-data DATA_FIN. (see beginning of tcp_data_queue)
 		 */
-		if (!after(TCP_SKB_CB(skb)->end_seq, tp->rcv_nxt)
+		if (!after(TCP_SKB_CB(skb)->end_seq, tp->rcv_nxt) 
 #ifdef CONFIG_MPTCP
-		&& !(mptcp(tp) && TCP_SKB_CB(skb)->end_seq == TCP_SKB_CB(skb)->seq)
+		&& !(mptcp(tp) && TCP_SKB_CB(skb)->end_seq == TCP_SKB_CB(skb)->seq) 
 #endif
 		) {
 			SOCK_DEBUG(sk, "ofo packet was already received\n");
@@ -4466,7 +4466,7 @@ static void tcp_data_queue_ofo(struct sock *sk, struct sk_buff *skb)
 	/* Do skb overlap to previous one? */
 	if (skb1 && before(seq, TCP_SKB_CB(skb1)->end_seq)) {
 		/* MPTCP allows non-data data-fin to be in the ofo-queue */
-		if (!after(end_seq, TCP_SKB_CB(skb1)->end_seq)
+		if (!after(end_seq, TCP_SKB_CB(skb1)->end_seq) 
 #ifdef CONFIG_MPTCP
 		&& !(mptcp(tp) && end_seq == seq)
 #endif
@@ -4531,7 +4531,7 @@ end:
 }
 
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 int __must_check tcp_queue_rcv(struct sock *sk, struct sk_buff *skb, int hdrlen,
 			       bool *fragstolen)
@@ -4608,7 +4608,7 @@ static void tcp_data_queue(struct sock *sk, struct sk_buff *skb)
 
 	/* If no data is present, but a data_fin is in the options, we still
 	 * have to call mptcp_queue_skb later on. */
-	if (TCP_SKB_CB(skb)->seq == TCP_SKB_CB(skb)->end_seq
+	if (TCP_SKB_CB(skb)->seq == TCP_SKB_CB(skb)->end_seq 
 #ifdef CONFIG_MPTCP
 		&& !(mptcp(tp) && mptcp_is_data_fin(skb))
 #endif
@@ -4658,7 +4658,7 @@ queue_and_out:
 			eaten = tcp_queue_rcv(sk, skb, 0, &fragstolen);
 		}
 		tp->rcv_nxt = TCP_SKB_CB(skb)->end_seq;
-		if (skb->len
+		if (skb->len 
 #ifdef CONFIG_MPTCP
 			|| mptcp_is_data_fin(skb)
 #endif
@@ -4913,7 +4913,7 @@ static void tcp_collapse_ofo_queue(struct sock *sk)
  * Return true if queue was pruned.
  */
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 bool tcp_prune_ofo_queue(struct sock *sk)
 {
@@ -5017,7 +5017,7 @@ void tcp_cwnd_application_limited(struct sock *sk)
 #endif
 
 #ifndef CONFIG_MPTCP
-static
+static 
 #endif
 bool tcp_should_expand_sndbuf(const struct sock *sk)
 {
@@ -5070,7 +5070,7 @@ static void tcp_check_space(struct sock *sk)
 {
 	if (sock_flag(sk, SOCK_QUEUE_SHRUNK)) {
 		sock_reset_flag(sk, SOCK_QUEUE_SHRUNK);
-		if
+		if 
 #ifdef CONFIG_MPTCP
 			(mptcp(tcp_sk(sk)) ||
 #endif
@@ -5662,7 +5662,7 @@ static bool tcp_rcv_fastopen_synack(struct sock *sk, struct sk_buff *synack,
 	 * "transmit", because if fastopen data is not acked, the retransmission
 	 * becomes the first MPTCP data (see mptcp_rcv_synsent_fastopen).
 	 */
-	if (data
+	if (data 
 #ifdef CONFIG_MPTCP
 		&& !mptcp(tp)
 #endif
@@ -5841,6 +5841,7 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
 		}
 		if (fastopen_fail)
 			return -1;
+
 		/* With MPTCP we cannot send data on the third ack due to the
 		 * lack of option-space to combine with an MP_CAPABLE.
 		 */
@@ -6203,7 +6204,7 @@ int tcp_rcv_state_process(struct sock *sk, struct sk_buff *skb,
 		tmo = tcp_fin_time(sk);
 		if (tmo > TCP_TIMEWAIT_LEN) {
 			inet_csk_reset_keepalive_timer(sk, tmo - TCP_TIMEWAIT_LEN);
-		} else if (th->fin ||
+		} else if (th->fin || 
 #ifdef CONFIG_MPTCP
 		mptcp_is_data_fin(skb) ||
 #endif
@@ -6269,7 +6270,7 @@ int tcp_rcv_state_process(struct sock *sk, struct sk_buff *skb,
 		 */
 		if (sk->sk_shutdown & RCV_SHUTDOWN) {
 			if (TCP_SKB_CB(skb)->end_seq != TCP_SKB_CB(skb)->seq &&
-			    after(TCP_SKB_CB(skb)->end_seq - th->fin, tp->rcv_nxt)
+			    after(TCP_SKB_CB(skb)->end_seq - th->fin, tp->rcv_nxt) 
 #ifdef CONFIG_MPTCP
 				&& !mptcp(tp)
 #endif

@@ -41,6 +41,7 @@
 #include <linux/notifier.h>
 #include <linux/memory.h>
 #include <linux/printk.h>
+#include <linux/ksm.h>
 
 #include <asm/uaccess.h>
 #include <asm/cacheflush.h>
@@ -769,6 +770,7 @@ int vma_adjust(struct vm_area_struct *vma, unsigned long start,
 	long adjust_next = 0;
 	int remove_next = 0;
 
+
 	if (next && !insert) {
 		struct vm_area_struct *exporter = NULL;
 
@@ -868,6 +870,7 @@ again:			remove_next = 1 + (end > next->vm_end);
 		end_changed = true;
 	}
 	vma->vm_pgoff = pgoff;
+
 	if (adjust_next) {
 		next->vm_start += adjust_next << PAGE_SHIFT;
 		next->vm_pgoff += adjust_next;
@@ -940,9 +943,9 @@ again:			remove_next = 1 + (end > next->vm_end);
 		next = vma->vm_next;
 		if (remove_next == 2)
 			goto again;
-		else if (next)
+		  else if (next)
 			vma_gap_update(next);
-		else
+		  else
 			VM_WARN_ON(mm->highest_vm_end != vm_end_gap(vma));
 	}
 	if (insert && file)
@@ -2576,6 +2579,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
 	else
 		err = vma_adjust(vma, vma->vm_start, addr, vma->vm_pgoff, new);
 
+
 	/* Success. */
 	if (!err)
 		return 0;
@@ -3094,7 +3098,6 @@ static struct vm_area_struct *__install_special_mapping(
 	ret = insert_vm_struct(mm, vma);
 	if (ret)
 		goto out;
-
 	mm->total_vm += len >> PAGE_SHIFT;
 
 	perf_event_mmap(vma);

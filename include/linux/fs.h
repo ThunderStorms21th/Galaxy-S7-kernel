@@ -2328,8 +2328,11 @@ extern int filemap_fdatawrite_range(struct address_space *mapping,
 extern int vfs_fsync_range(struct file *file, loff_t start, loff_t end,
 			   int datasync);
 extern int vfs_fsync(struct file *file, int datasync);
+extern bool fsync_enabled;
 static inline int generic_write_sync(struct file *file, loff_t pos, loff_t count)
 {
+	if (!fsync_enabled)
+		return 0;
 	if (!(file->f_flags & O_DSYNC) && !IS_SYNC(file->f_mapping->host))
 		return 0;
 	return vfs_fsync_range(file, pos, pos + count - 1,
@@ -2887,7 +2890,5 @@ static inline bool dir_relax(struct inode *inode)
 	mutex_lock(&inode->i_mutex);
 	return !IS_DEADDIR(inode);
 }
-
-extern void inode_nohighmem(struct inode *inode);
 
 #endif /* _LINUX_FS_H */

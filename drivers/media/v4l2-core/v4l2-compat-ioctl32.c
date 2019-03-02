@@ -473,7 +473,7 @@ static int get_v4l2_buffer32(struct v4l2_buffer __user *kp,
 {
 	u32 type;
 	u32 length;
-  u32 reserved;
+	u32 reserved;
 	enum v4l2_memory memory;
 	struct v4l2_plane32 __user *uplane32;
 	struct v4l2_plane __user *uplane;
@@ -503,6 +503,7 @@ static int get_v4l2_buffer32(struct v4l2_buffer __user *kp,
 		    copy_from_user(&kp->timecode, &up->timecode, sizeof(struct v4l2_timecode)) ||
 		    assign_in_user(&kp->sequence, &up->sequence) ||
 		    assign_in_user(&kp->reserved2, &up->reserved2))
+
 			return -EFAULT;
 
 	if (V4L2_TYPE_IS_MULTIPLANAR(type)) {
@@ -722,11 +723,11 @@ static inline int put_v4l2_input32(struct v4l2_input __user *kp,
 }
 
 struct v4l2_ext_controls32 {
-	__u32 ctrl_class;
-	__u32 count;
-	__u32 error_idx;
-	__u32 reserved[2];
-	compat_caddr_t controls; /* actually struct v4l2_ext_control32 * */
+       __u32 ctrl_class;
+       __u32 count;
+       __u32 error_idx;
+       __u32 reserved[2];
+       compat_caddr_t controls; /* actually struct v4l2_ext_control32 * */
 };
 
 struct v4l2_ext_control32 {

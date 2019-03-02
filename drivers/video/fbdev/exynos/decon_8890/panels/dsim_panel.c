@@ -332,9 +332,7 @@ static int dsim_panel_displayon(struct dsim_device *dsim)
 		return ret;
 	}
 
-
 	display_on = true;
-
 
 #ifdef CONFIG_LCD_ALPM
 	mutex_lock(&panel->alpm_lock);
@@ -408,7 +406,7 @@ static int dsim_panel_suspend(struct dsim_device *dsim)
 	}
 	panel->state = PANEL_STATE_SUSPENED;
 
-display_on = false;
+	display_on = false;
 
 suspend_err:
 	return ret;

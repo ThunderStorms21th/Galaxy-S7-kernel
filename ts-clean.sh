@@ -4,7 +4,7 @@
 #
 # Thanks to MoRoGoku for Cleaning Script
 #
-# ThundeRStorms cleaning script
+# ThundeRStorms cleaning script v1.1
 
 echo ""
 echo "Cleaning script for ThunderStorms kernel"

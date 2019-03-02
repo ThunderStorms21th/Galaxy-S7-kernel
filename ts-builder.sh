@@ -3,7 +3,7 @@
 # Thanks to Tkkg1994 and djb77 for the script
 #
 # Thanks to MoRoGoku for the script
-# Kernel Build Script v1.3, modified by ThunderStorms Team
+# Kernel Build Script v1.5, modified by ThunderStorms Team
 #
 
 # SETUP
@@ -11,11 +11,13 @@
 export ARCH=arm64
 export SUBARCH=arm64
 #export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-master/bin/aarch64-linux-android-
-#export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
-export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9/bin/aarch64-linux-android-
-#up works
-#export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linaro-linux-android-6.3.1/bin/aarch64-linux-android-
-#export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-945/bin/aarch64-linux-android-
+export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
+# WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+# NO WORKS export BUILD_CROSS_COMPILE=~kernel/toolchain/arm-eabi-4.8-master/bin/arm-eabi-
+# NO WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/arm32_arm64_cross_toolchain-master/bin/aarch64-linux-aarch64-linux-
+# BL - export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-gnu-7.3-master/bin/aarch64-linux-gnu-
+# BL export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linaro-linux-android-6.3.1/bin/aarch64-linux-android-
+# WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-945/bin/aarch64-linux-android-
 #export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-sabermod-7.0/bin/aarch64-
 #export BUILD_CROSS_COMPILE=~/kernel/kernel/toolchain/aarch64-uber-linux-android-4.9.4/bin/aarch64-linux-android-
 #export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-6.3/bin/aarch64-linux-android-
@@ -37,11 +39,11 @@ INCDIR=$RDIR/include
 PAGE_SIZE=2048
 DTB_PADDING=0
 
-DEFCONFIG=exynos8890-herolte_defconfig
-DEFCONFIG_S7EDGE=ts-edge_defconfig
-DEFCONFIG_S7FLAT=ts-flat_defconfig
+DEFCONFIG=ts-kernel_defconfig
+DEFCONFIG_S7EDGE=hero2lte_defconfig
+DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v1.4"
+export K_VERSION="v1.5"
 export K_BASE="U3ESA2"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
