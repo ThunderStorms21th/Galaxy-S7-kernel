@@ -320,6 +320,8 @@ static int cpufreq_thermal_notifier(struct notifier_block *nb,
 	mutex_lock(&cooling_cpufreq_lock);
 	list_for_each_entry(cpufreq_dev, &cpufreq_dev_list, node) {
 		if (!cpumask_test_cpu(policy->cpu,
+/* added drop fix */
+			unsigned long level = get_level(cpufreq_dev, freq); /* end */
 					&cpufreq_dev->allowed_cpus))
 			continue;
 
@@ -332,6 +334,8 @@ static int cpufreq_thermal_notifier(struct notifier_block *nb,
 
 		if (policy->max != max_freq)
 			cpufreq_verify_within_limits(policy, 0, max_freq);
+/* added */
+	return level; /* end */
 	}
 	mutex_unlock(&cooling_cpufreq_lock);
 
