@@ -6,6 +6,7 @@
 
 import /init.environ.rc
 import /init.usb.rc
+
 import /init.${ro.hardware}.rc
 import /vendor/etc/init/hw/init.${ro.hardware}.rc
 import /init.usb.configfs.rc
@@ -46,9 +47,6 @@ on init
     # Backward compatibility.
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
-
-    # Link /odm to /system/odm for devices without a odm partition.
-    symlink /system/odm /odm
 
     # Link /vendor to /system/vendor for devices without a vendor partition.
     symlink /system/vendor /vendor
@@ -113,7 +111,6 @@ on init
     mkdir /mnt/appfuse 0711 root root
 
     # Storage views to support runtime permissions
-    mkdir /storage 0755 root root
     mkdir /mnt/runtime 0700 root root
     mkdir /mnt/runtime/default 0755 root root
     mkdir /mnt/runtime/default/self 0755 root root
@@ -436,9 +433,6 @@ on late-fs
     class_start early_hal
 
 on post-fs-data
-    # SELinux Settings (0 = Permissive / 1 = Enforcing)
-    setenforce 0
-    SELINUX=permissive
 
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
@@ -538,6 +532,11 @@ on post-fs-data
     mkdir /dev/socket/uibc 0777 media system
     chown media system /dev/socket/uibc
     chmod 0775 /dev/socket/uibc
+
+    # VaultKeeper socket
+    mkdir /dev/socket/vaultkeeper 0770 system system
+    chown system system /dev/socket/vaultkeeper
+    chmod 0770 /dev/socket/vaultkeeper
 
     # barnswallow Daemon socket
     mkdir /dev/socket/bsd 0770 system system
@@ -701,6 +700,10 @@ on zygote-start && property:ro.crypto.state=encrypted && property:ro.crypto.type
     start zygote_secondary
 
 on boot
+    #knox_kap
+    chown system system /dev/knox_kap
+    chmod 0644 /dev/knox_kap
+
     # basic network init
     ifup lo
     hostname localhost
@@ -1417,6 +1420,9 @@ service iod /system/bin/iod
     oneshot
     disabled
 
+service vaultkeeperd /system/bin/vaultkeeperd
+    class core
+
 # Barnswallow Daemon
 service bsd /system/bin/bsd
     user system
@@ -1481,6 +1487,73 @@ on property:persist.security.tlc.esecomm=1
     start esecomm
     setprop persist.security.tlc.esecomm 0
 
+# knox_changer service
+# Allow the Knox Active Protection mode to be set from recovery
+service kap_enable /sbin/knox_changer -e
+    seclabel u:r:kapd:s0
+    class main
+    disabled
+    oneshot
+
+service kap_disable /sbin/knox_changer -d
+    seclabel u:r:kapd:s0
+    class main
+    disabled
+    oneshot
+
+on property:security.knox_kap_mode=true
+    start kap_enable
+
+on property:security.knox_kap_mode=false
+    start kap_disable
+
+# Allow the AFW mode to be set from recovery
+service afw_enable /sbin/knox_changer -f
+    seclabel u:r:kapd:s0
+    class main
+    disabled
+    oneshot
+
+service afw_disable /sbin/knox_changer -s
+    seclabel u:r:kapd:s0
+    class main
+    disabled
+    oneshot
+
+on property:security.knox_afw_mode=true
+    start afw_enable
+
+on property:security.knox_afw_mode=false
+    start afw_disable
+
+
+# UCM ODE mode
+service ucs_enable /sbin/knox_changer -u
+    class main
+    seclabel u:r:kapd:s0
+    disabled
+    oneshot
+
+service ucs_disable /sbin/knox_changer -v
+    class main
+    seclabel u:r:kapd:s0
+    disabled
+    oneshot
+
+service ucs_reset /sbin/knox_changer -w
+    class main
+    seclabel u:r:kapd:s0
+    disabled
+    oneshot
+
+on property:security.knox_ucs_mode=true
+    start ucs_enable
+
+on property:security.knox_ucs_mode=false
+    start ucs_disable
+
 on property:sys.sf.restart=1
     restart surfaceflinger
 
+on property:security.knox_ucs_mode=reset
+    start ucs_reset

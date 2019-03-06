@@ -20,9 +20,9 @@ on boot
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1378000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 95
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "25000 650000:30000 1066000:45000"
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "30000 650000:30000 1066000:45000"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 30000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
@@ -32,7 +32,7 @@ on boot
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "80 1066000:90"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 50000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode 0
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -53,9 +53,9 @@ on boot
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2080000
    chmod 0444 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 93
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 95
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "65000 936000:30000 1248000:40000 1560000:45000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "62000 936000:30000 1248000:40000 1560000:45000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 30000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
@@ -65,7 +65,7 @@ on boot
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "80 1040000:81 1352000:87 1664000:90"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 60000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode 0
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost

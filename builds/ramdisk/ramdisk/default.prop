@@ -47,6 +47,6 @@ wlan.wfd.hdcp=disable
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Tue Jan 8 15:39:50 KST 2019
-ro.bootimage.build.date.utc=1546929590
-ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXU3ESA3:user/test-keys
+ro.bootimage.build.date=Tue Feb 12 00:17:52 KST 2019
+ro.bootimage.build.date.utc=1549898272
+ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXS4ESBB:user/test-keys
