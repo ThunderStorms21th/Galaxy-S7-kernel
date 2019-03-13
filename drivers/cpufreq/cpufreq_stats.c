@@ -400,12 +400,12 @@ static int __cpufreq_stats_create_table(struct cpufreq_policy *policy,
 	cpufreq_for_each_valid_entry(pos, table)
 		if (freq_table_get_index(stat, pos->frequency) == -1)
 			stat->freq_table[i++] = pos->frequency;
-/*	stat->state_num = i; /*
-/*	spin_lock(&cpufreq_stats_lock); */
+/*	..stat->state_num = i; /*
+/*	..spin_lock(&cpufreq_stats_lock); */
 	stat->state_num = i;
 	stat->last_time = get_jiffies_64();
 	stat->last_index = freq_table_get_index(stat, policy->cur);
-/*	spin_unlock(&cpufreq_stats_lock); */
+/*	..spin_unlock(&cpufreq_stats_lock); */
 	return 0;
 error_alloc:
 	sysfs_remove_group(&policy->kobj, &stats_attr_group);
