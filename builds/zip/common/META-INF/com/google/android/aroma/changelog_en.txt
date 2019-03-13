@@ -2,19 +2,40 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v1.6</#></b>
-	DATE	: <b><#selectbg_g>6/03/2019</#></b>
+	VERSION	: <b><#selectbg_g>v1.7</#></b>
+	DATE	: <b><#selectbg_g>13/03/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
-	<#53a6f4><b>ONLY FOR Galaxy S7/S7 Edge</b></#>
+<#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
 
 
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.7 : 13.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESBB</*>
+<*>Support deodexed and ported roms | not sure 100% works</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>Added CPU BOOST drivers - default off</*>
+<*>Added new CPU governors | zzmove works only in Big CPU |</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Back GPU Voltage control</*>
+<*>Fix: No heat and no lags</*>
+<*>Fix: some policy CPU and added CPU boost</*>
+<*>The rest like in previous version v1.6</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.6 : 6.03.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
-<*>Samsung ramdisk G930FXXU3ESBB</*>
+<*>Samsung ramdisk G930FXXS4ESBB</*>
 <*>Support deodexed and ported roms | not sure 100% works</*>
 <*>Flat and Edge versions</*>
 <*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
@@ -26,6 +47,7 @@
 <*>SELinux : permissive</*>
 <*>Added Moro Sound Drivers</*>
 <*>compiler : aarch64-linux-android-4.9</*>
+<*>Dynamic Stune Boost v2</*>
 <*>Fix: No heat and no lags</*>
 <*>Fix: some policy CPU and added CPU boost</*>
 <*>The rest like in previous version v1.5</*>
