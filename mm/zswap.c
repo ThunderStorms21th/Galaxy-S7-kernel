@@ -109,11 +109,11 @@ static unsigned int zswap_max_pool_percent = 500;
 module_param_named(max_pool_percent,
 			zswap_max_pool_percent, uint, 0644);
 
-static unsigned int zswap_high_pool_percent = 200;
+static unsigned int zswap_high_pool_percent = 50;
 module_param_named(high_pool_percent,
 			zswap_high_pool_percent, uint, 0644);
 
-static unsigned int zswap_low_pool_percent = 10;
+static unsigned int zswap_low_pool_percent = 30;
 module_param_named(low_pool_percent,
 			zswap_low_pool_percent, uint, 0644);
 
