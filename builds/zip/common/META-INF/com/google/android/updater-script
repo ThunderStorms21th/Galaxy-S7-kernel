@@ -76,6 +76,16 @@ if file_getprop("/tmp/aroma/menu.prop", "chk3") == "1" then
 	package_extract_dir("apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
 endif;
 
+# TS kernel Profiles
+if file_getprop("/tmp/aroma/menu.prop", "chk6") == "1" then
+	ui_print(" ");
+	ui_print("@Install ThundeRStormS kernel Profiles...");
+	run_program("/tmp/ts/tskernel2.sh");
+	package_extract_dir("ts/profiles", "/data/media/0/Spectrum/profiles/");
+	package_extract_dir("ts/profiles", "/sdcard/Spectrum/profiles/");
+	package_extract_dir("ts/profiles", "/storage/emulated/0/Spectrum/profiles/");
+endif;
+
 # Patch for deodexed and ported roms
 if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
 	
@@ -88,14 +98,6 @@ if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
 	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
 	run_program("/sbin/sh", "/tmp/tsk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip");
 	delete_recursive("/tmp/tsk");
-endif;
-
-# TS kernel Profiles
-if file_getprop("/tmp/aroma/menu.prop", "chk6") == "1" then
-	ui_print(" ");
-	ui_print("@Install ThundeRStormS kernel Profiles...");
-	run_program("/tmp/ts/tskernel2.sh");
-	package_extract_dir("ts/profiles", "/data/media/0/Spectrum/profiles/");
 endif;
 
 # Recovery
