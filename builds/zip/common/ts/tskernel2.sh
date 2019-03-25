@@ -20,6 +20,13 @@ BUILDPROP=/system/build.prop
 
 	## System Patches
 
-	mkdir $TS
-        cp -rLf profiles/. /data/media/0/Spectrum/profiles/
-	chmod 777 $TS
+	# mkdir $TS
+        # cp -rLf profiles/. /data/media/0/Spectrum/profiles/
+	# chmod 777 $TS
+
+	## SPECTRUM PROFILES
+	ui_print " "
+	ui_print "@Install Spectrum (TS) Profiles"
+	mkdir -p /data/media/0/Spectrum/profiles 2>/dev/null;
+	cp -rf /tmp/ts/profiles/. /data/media/0/Spectrum/profiles/
+

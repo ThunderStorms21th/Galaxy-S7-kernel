@@ -2,8 +2,8 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v1.7</#></b>
-	DATE	: <b><#selectbg_g>13/03/2019</#></b>
+	VERSION	: <b><#selectbg_g>v1.8</#></b>
+	DATE	: <b><#selectbg_g>23/03/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
@@ -12,6 +12,33 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.8 : 23.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC1</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>SmartPack-Kernel Menager v7.5</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>Added Input Touch Boost</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added Fingerprint boost - default turned ON</*>
+  | MTweaks no support it-only can change via bash script|
+<*>Changes in hotplug freq's v1.0</*>
+<*>Added new CPU governors + chill gov</*>
+  | zzmove works only in Big CPU |
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.7</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.7 : 13.03.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXS4ESBB</*>

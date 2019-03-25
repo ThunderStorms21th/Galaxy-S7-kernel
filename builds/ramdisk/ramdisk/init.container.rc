@@ -77,6 +77,13 @@ on post-fs-data
 
 on boot
 
+#group system log shell
+service epmlogd /system/bin/epmlogd
+    class main
+    user system
+    group system log shell
+    oneshot
+
 service sdp_cryptod /system/bin/sdp_cryptod
     class main
     socket sdp stream 0660 system system

@@ -33,3 +33,13 @@ BUILDPROP=/system/build.prop
 	rm -f /system/su.d/wakelock*
 	rm -f /system/etc/init.d/wakelock*
 
+	## PERMISSIONS
+	ui_print " "
+	ui_print "@Setting Permissions"
+	set_perm 0 2000 0644 /system/vendor/lib/libsecure_storage.so u:object_r:system_file:s0
+	set_perm 0 2000 0644 /system/vendor/lib64/libsecure_storage.so u:object_r:system_file:s0
+	set_perm 0 2000 0644 /system/vendor/lib/egl/libGLES_mali.so u:object_r:system_file:s0
+	set_perm 0 2000 0644 /system/vendor/lib64/egl/libGLES_mali.so u:object_r:system_file:s0
+	set_perm 0 0 0644 /system/priv-app/PersonalPageService/* u:object_r:system_file:s0
+
+
