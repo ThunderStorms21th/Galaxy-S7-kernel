@@ -529,8 +529,7 @@ static ssize_t pm_trace_show(struct kobject *kobj, struct kobj_attribute *attr,
 	return sprintf(buf, "%d\n", pm_trace_enabled);
 }
 
-static ssize_t
-pm_trace_store(struct kobject *kobj, struct kobj_attribute *attr,
+static ssize_t pm_trace_store(struct kobject *kobj, struct kobj_attribute *attr,
 	       const char *buf, size_t n)
 {
 	int val;
