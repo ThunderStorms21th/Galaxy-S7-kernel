@@ -85,18 +85,18 @@ echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo "338000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo "546000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo "624000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-echo "50000 546000:40000 754000:40000 962000:40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "80000 624000:30000 1040000:40000 1248000:40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "50000 650000:30000 754000:30000 962000:30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+echo "80000 624000:30000 1040000:30000 1248000:20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 echo "80 858000:85 1066000:90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 echo "75 832000:78 1040000:80 1352000:85" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 echo "97" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo "98" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+echo "97" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
 echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-echo "10000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-echo "10000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
+echo "20000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+echo "20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
 
 # HMP settings
 echo "760" > /sys/kernel/hmp/up_threshold
@@ -106,11 +106,11 @@ echo "858000" > /sys/kernel/hmp/down_compensation_mid_freq
 echo "754000" > /sys/kernel/hmp/down_compensation_low_freq
 
 # Stock GPU Settings
-echo "702" > /sys/devices/14ac0000.mali/max_clock
+echo "650" > /sys/devices/14ac0000.mali/max_clock
 echo "112" > /sys/devices/14ac0000.mali/min_clock
 echo "419" /sys/devices/14ac0000.mali/highspeed_clock
 echo "1" /sys/devices/14ac0000.mali/highspeed_delay
-echo "90" /sys/devices/14ac0000.mali/highspeed_load
+echo "95" /sys/devices/14ac0000.mali/highspeed_load
 
 # I/O sched settings
 echo 'cfq' > /sys/block/sda/queue/scheduler
@@ -128,7 +128,7 @@ echo "368" > /sys/block/mmcblk0/queue/nr_requests
 echo "18920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
 
 # SSWAP and Entropy
-echo "40" > /proc/sys/vm/swappiness
+echo "50" > /proc/sys/vm/swappiness
 echo "256" > /proc/sys/kernel/random/write_wakeup_threshold
 echo "64" > /proc/sys/kernel/random/read_wakeup_threshold
 echo "500" > /proc/sys/vm/dirty_expire_centisecs
@@ -138,7 +138,7 @@ echo "1000" > /proc/sys/vm/dirty_writeback_centisecs
 echo "0" > /sys/module/cpu_boost/parameters/input_boost_enabled
 
 # Enable Fingerprint boost
-echo "1" > /sys/kernel/fp_boost/enabled
+# echo "0" > /sys/kernel/fp_boost/enabled
 
 # Tweaks: Internet Speed
 echo 'westwood' > /proc/sys/net/ipv4/tcp_congestion_control

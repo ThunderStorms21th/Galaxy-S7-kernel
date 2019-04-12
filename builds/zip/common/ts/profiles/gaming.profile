@@ -86,7 +86,7 @@
 
    # GPU
    chmod 0664 /sys/devices/14ac0000.mali/max_clock
-   write /sys/devices/14ac0000.mali/max_clock 806
+   write /sys/devices/14ac0000.mali/max_clock 650
    chmod 0664 /sys/devices/14ac0000.mali/min_clock
    write /sys/devices/14ac0000.mali/min_clock 260
    chmod 0664 /sys/devices/14ac0000.mali/power_policy
