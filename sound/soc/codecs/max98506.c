@@ -451,7 +451,8 @@ static int max98506_spk_gain_put(struct snd_kcontrol *kcontrol,
 
 	return 0;
 }
-#ifdef CONFIG_MORO_SOUND_CONTROL
+
+#ifdef CONFIG_MORO_SOUND
 struct snd_soc_codec *max98506_codec;
 
 int get_speaker_gain(void)
@@ -1683,7 +1684,7 @@ static int max98506_probe(struct snd_soc_codec *codec)
 	dev_info(codec->dev, "build number %s\n", MAX98506_REVISION);
 
 	max98506->codec = codec;
-#ifdef CONFIG_MORO_SOUND_CONTROL
+#ifdef CONFIG_MORO_SOUND
 	max98506_codec = codec;
 #endif
 	codec->control_data = max98506->regmap;
