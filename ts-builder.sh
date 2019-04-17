@@ -3,7 +3,7 @@
 # Thanks to Tkkg1994 and djb77 for the script
 #
 # Thanks to MoRoGoku for the script
-# Kernel Build Script v1.8, modified by ThunderStorms Team
+# Kernel Build Script v1.9.1, modified by ThunderStorms Team
 #
 
 # SETUP
@@ -11,8 +11,8 @@
 export ARCH=arm64
 export SUBARCH=arm64
 # NO WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/gcc-linaro-5.5.0-2017.10-i686_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
-# export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-master/bin/aarch64-linux-android-
-# export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
+#export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-master/bin/aarch64-linux-android-
+# WORKS good export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
 export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 # NO WORKS export BUILD_CROSS_COMPILE=~kernel/toolchain/arm-eabi-4.8-master/bin/arm-eabi-
 # NO WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/arm32_arm64_cross_toolchain-master/bin/aarch64-linux-aarch64-linux-
@@ -44,7 +44,7 @@ DEFCONFIG=ts-kernel_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v1.9"
+export K_VERSION="v2.0"
 export K_BASE="S4ESC7"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
