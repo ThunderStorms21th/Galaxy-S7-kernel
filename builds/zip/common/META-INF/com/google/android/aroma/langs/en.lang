@@ -89,10 +89,10 @@ menu.5desc=Famous Root of Chainfire.
 menu.12=Kernel for ported or deodexed rom
 menu.12desc=Select this if You have ported or deodexed rom
 menu.group2=Other options
-menu.3=MTweaks v2.13.4
+menu.3=MTweaks v2.14.0
 menu.3desc=Application for kernel management modified by MoRoGoKu
-menu.12=SmartPack-Kernel Menager v7.5
-menu.12desc=Application for kernel management modified version of official Kernel Adiutor.
+# menu.12=SmartPack-Kernel Menager v7.5
+# menu.12desc=Application for kernel management modified version of official Kernel Adiutor.
 menu.4=Busybox
 menu.4desc=Busybox 1.27.2\
 Necessary. Uncheck only if you have a higher version.

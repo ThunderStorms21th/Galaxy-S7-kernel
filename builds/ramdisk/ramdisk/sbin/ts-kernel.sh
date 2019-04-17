@@ -80,15 +80,15 @@ echo "0" > /proc/sys/kernel/panic
 
 # Stock CPU Settings
 echo "2288000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-echo "416000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+echo "312000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-echo "338000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo "234000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo "546000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo "624000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
 echo "50000 650000:30000 754000:30000 962000:30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 echo "80000 624000:30000 1040000:30000 1248000:20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 echo "80 858000:85 1066000:90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo "75 832000:78 1040000:80 1352000:85" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+echo "80 832000:85 1040000:88 1352000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 echo "97" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 echo "97" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
@@ -119,8 +119,8 @@ echo 'cfq' > /sys/block/mmcblk0/queue/scheduler
 echo "1024" > /sys/block/mmcblk0/queue/read_ahead_kb
 echo "0" > /sys/block/sda/queue/iostats
 echo "0" > /sys/block/mmcblk0/queue/iostats
-echo "0" > /sys/block/sda/queue/rq_affinity
-echo "0" > /sys/block/mmcblk0/queue/rq_affinity
+echo "1" > /sys/block/sda/queue/rq_affinity
+echo "1" > /sys/block/mmcblk0/queue/rq_affinity
 echo "368" > /sys/block/sda/queue/nr_requests
 echo "368" > /sys/block/mmcblk0/queue/nr_requests
 
@@ -129,16 +129,13 @@ echo "18920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parame
 
 # SSWAP and Entropy
 echo "50" > /proc/sys/vm/swappiness
-echo "256" > /proc/sys/kernel/random/write_wakeup_threshold
+echo "128" > /proc/sys/kernel/random/write_wakeup_threshold
 echo "64" > /proc/sys/kernel/random/read_wakeup_threshold
 echo "500" > /proc/sys/vm/dirty_expire_centisecs
 echo "1000" > /proc/sys/vm/dirty_writeback_centisecs
 
 # CPU BOOST OFF
 echo "0" > /sys/module/cpu_boost/parameters/input_boost_enabled
-
-# Enable Fingerprint boost
-# echo "0" > /sys/kernel/fp_boost/enabled
 
 # Tweaks: Internet Speed
 echo 'westwood' > /proc/sys/net/ipv4/tcp_congestion_control

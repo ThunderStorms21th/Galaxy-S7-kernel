@@ -2,8 +2,8 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v1.9</#></b>
-	DATE	: <b><#selectbg_g>12/04/2019</#></b>
+	VERSION	: <b><#selectbg_g>v2.0</#></b>
+	DATE	: <b><#selectbg_g>16/04/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
@@ -12,6 +12,33 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v2.0 : 16.04.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC7</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.14.0</*>
+<*>Moro Sound Drivers 2.1</*>
+<*>Removed SmartPack-Kernel Menager v7.5</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.137 ELS</*>
+<*>Removed Finger Boost</*>
+<*>Removed Input Touch Boost</*>
+<*>Added LEDs & Fade control</*>
+<*>Lower voltage table for both CPU for lower power consumpion</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery Store controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added lower values of CPU min freq's</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.8</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v1.9 : 12.04.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXS4ESC7</*>

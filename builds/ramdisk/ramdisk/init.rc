@@ -6,7 +6,6 @@
 
 import /init.environ.rc
 import /init.usb.rc
-
 import /init.${ro.hardware}.rc
 import /vendor/etc/init/hw/init.${ro.hardware}.rc
 import /init.usb.configfs.rc
@@ -437,7 +436,6 @@ on late-fs
     class_start early_hal
 
 on post-fs-data
-
     # SELinux Settings (0 = Permissive / 1 = Enforcing)
     setenforce 0
     SELINUX=permissive
@@ -703,7 +701,6 @@ on zygote-start && property:ro.crypto.state=encrypted && property:ro.crypto.type
     start zygote_secondary
 
 on boot
-
     # basic network init
     ifup lo
     hostname localhost

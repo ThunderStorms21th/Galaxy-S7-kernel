@@ -25,6 +25,7 @@ ro.dalvik.vm.native.bridge=0
 dalvik.vm.usejit=true
 dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
+# dalvik.vm.appimageformat=lzo
 dalvik.vm.appimageformat=lz4
 pm.dexopt.first-boot=quicken
 pm.dexopt.boot=verify
@@ -46,7 +47,6 @@ wlan.wfd.hdcp=disable
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Mon Mar 4 11:06:12 KST 2019
-ro.bootimage.build.date.utc=1551665172
-ro.bootimage.build.fingerprint=samsung/heroltexx/herolte:8.0.0/R16NW/G930FXXS4ESC1:user/test-keys
-
+ro.bootimage.build.date=Tue Feb 12 00:17:52 KST 2019
+ro.bootimage.build.date.utc=1549898272
+ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXS4ESBB:user/test-keys

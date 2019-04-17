@@ -1,8 +1,8 @@
 ui_print("*******************************************************************");
-ui_print("                      ThunderStorm Kernel Oreo                     ");
-ui_print("                        For Samsung Galaxy S7                      ");
-ui_print("               Developed by ThundeRStormS Team                     ");
-ui_print("                                   TS Team                         ");
+ui_print("                     ThunderStorm Kernel Oreo                     ");
+ui_print("                       For Samsung Galaxy S7                      ");
+ui_print("              Developed by ThundeRStormS Team                     ");
+ui_print("                                  TS Team                         ");
 ui_print("*******************************************************************");
 set_progress(0.01);
 
@@ -74,18 +74,6 @@ if file_getprop("/tmp/aroma/menu.prop", "chk3") == "1" then
 	delete_recursive("/data/data/com.moro.mtweaks*");
 	run_program("/tmp/ts/ts_clean.sh", "com.moro.mtweaks", "-as");
 	package_extract_dir("apps/com.moro.mtweaks-1", "/data/app/com.moro.mtweaks-1");
-endif;
-
-# SmartPack-Kernel Menager
-if file_getprop("/tmp/aroma/menu.prop", "chk12") == "1" then
-	ui_print(" ");
-	ui_print("@Installing MTWeaks App...");
-	delete_recursive("/system/app/com.smartpack.kernelmanager*");
-	delete_recursive("/system/priv-app/com.smartpack.kernelmanager*");
-	delete_recursive("/data/app/com.smartpack.kernelmanager*");
-	delete_recursive("/data/data/com.smartpack.kernelmanager*");
-	run_program("/tmp/ts/ts_clean.sh", "com.smartpack.kernelmanager", "-as");
-	package_extract_dir("apps/com.smartpack.kernelmanager-1", "/data/app/com.smartpack.kernelmanager-1");
 endif;
 
 # TS kernel Profiles

@@ -3,7 +3,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 338000
+   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 234000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1378000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
@@ -35,7 +35,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor interactive
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
-   write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 416000
+   write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 312000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1872000
    chmod 0444 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
@@ -50,7 +50,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "75 832000:78 1040000:80 1352000:85"
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "80 832000:85 1040000:88 1352000:90"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
@@ -104,8 +104,8 @@
    write /sys/block/sda/queue/read_ahead_kb 512
    write /sys/block/mmcblk0/queue/scheduler bfq
    write /sys/block/mmcblk0/queue/read_ahead_kb 768
-   write /sys/block/sda/queue/rq_affinity 0
-   write /sys/block/mmcblk0/queue/rq_affinity 0
+   write /sys/block/sda/queue/rq_affinity 1
+   write /sys/block/mmcblk0/queue/rq_affinity 1
    write /sys/block/sda/queue/nr_requests 128
    write /sys/block/mmcblk0/queue/nr_requests 128
 
@@ -115,7 +115,7 @@
    write /sys/module/wakeup/parameters/enable_bcmdhd4359_wl 0
    write /sys/module/wakeup/parameters/enable_bluedroid_timer_wl 0
    write /sys/module/wakeup/parameters/enable_wlan_wake_wl 0
-   write /sys/module/sec_battery/parameters/wl_polling 3
+   write /sys/module/sec_battery/parameters/wl_polling 4
    write /sys/module/sec_nfc/parameters/wl_nfc 1
 
    # Misc
