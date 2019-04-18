@@ -1495,11 +1495,11 @@ static ssize_t store_leds_property(struct device *dev,
 		leds_control.noti_ramp_control = val;
 		break;
 	case NOTIFICATION_RAMP_UP:
-		sanitize_min_max(val, 0, 2000);
+		sanitize_min_max(val, 0, 4000);
 		leds_control.noti_ramp_up = val;
 		break;
 	case NOTIFICATION_RAMP_DOWN:
-		sanitize_min_max(val, 0, 2000);
+		sanitize_min_max(val, 0, 4000);
 		leds_control.noti_ramp_down = val;
 		break;
 	case NOTIFICATION_DELAY_ON:
