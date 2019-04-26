@@ -8420,8 +8420,8 @@ static int sec_battery_probe(struct platform_device *pdev)
 
 	dev_info(battery->dev,
 		"%s: SEC Battery Driver Loaded\n", __func__);
-	
-//	charger_control_init(battery);
+// added battery control	
+	charger_control_init(battery);
 
 	return 0;
 

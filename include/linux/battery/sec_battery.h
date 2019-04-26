@@ -528,8 +528,10 @@ enum {
 	EXT_DEV_GAMEPAD_CHG,
 	EXT_DEV_GAMEPAD_OTG,
 };
-
+/*
 void charger_control_init(struct sec_battery_info *info);
+*/
+void charger_control_init(struct sec_battery_info *info); // added
 
 #ifdef CONFIG_OF
 extern int adc_read(struct sec_battery_info *battery, int channel);
