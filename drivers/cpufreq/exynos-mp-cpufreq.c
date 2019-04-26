@@ -82,6 +82,10 @@ struct lpj_info {
 static struct lpj_info global_lpj_ref;
 #endif
 
+/* 4 cores toggle */
+struct device_node *moro_np;
+static int cluster1_all_cores = 0; /* end */
+
 /* For switcher */
 static unsigned int freq_min[CL_END] __read_mostly;	/* Minimum (Big/Little) clock frequency */
 static unsigned int freq_max[CL_END] __read_mostly;	/* Maximum (Big/Little) clock frequency */
@@ -1459,15 +1463,16 @@ static ssize_t show_cpufreq_max_limit(struct kobject *kobj,
 
 	return nsize;
 }
-
-static void enable_nonboot_cluster_cpus(void)
+// static void enable_nonboot_cluster_cpus(void)
+void enable_nonboot_cluster_cpus(void)
 {
 	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CPUS);
 }
-
-static void disable_nonboot_cluster_cpus(void)
+// static void disable_nonboot_cluster_cpus(void)
+void disable_nonboot_cluster_cpus(void)
 {
-	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS);
+//	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS);
+	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS + 1);
 }
 
 static ssize_t store_cpufreq_max_limit(struct kobject *kobj, struct attribute *attr,
@@ -1783,10 +1788,47 @@ static ssize_t store_cluster0_volt_table(struct kobject *kobj, struct attribute 
 	return store_volt_table(kobj, attr, buf, count, CL_ZERO);
 }
 
+/* add 4 cores toggle */
+static ssize_t show_cluster1_all_cores_max_freq(struct kobject *kobj,
+				struct attribute *attr, char *buf)
+{
+	return sprintf(buf, "%d\n", cluster1_all_cores);
+}
+
+static ssize_t store_cluster1_all_cores_max_freq(struct kobject *kobj, struct attribute *attr,
+					const char *buf, size_t count)
+{
+	struct exynos_dvfs_info *ptr = exynos_info[1];
+	unsigned int ret = -EINVAL;
+	int val;
+
+	ret = sscanf(buf, "%d", &val);
+
+	if (ret != 1)
+		return -EINVAL;
+
+	cluster1_all_cores = val;
+
+	if (cluster1_all_cores) {
+		ret = of_property_read_u32_array(moro_np, "cl1_full_max_support_idx_table",
+				(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+	} else {
+		ret = of_property_read_u32_array(moro_np, "cl1_max_support_idx_table",
+				(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+	}
+
+	if (ret < 0)
+		return -ENODEV;
+
+	return count;
+}
+/* end */
+
 define_one_global_ro(cluster1_freq_table);
 define_one_global_rw(cluster1_min_freq);
 define_one_global_rw(cluster1_max_freq);
 define_one_global_rw(cluster1_volt_table);
+define_one_global_rw(cluster1_all_cores_max_freq); /* added 4 cores toggle */
 define_one_global_ro(cluster0_freq_table);
 define_one_global_rw(cluster0_min_freq);
 define_one_global_rw(cluster0_max_freq);
@@ -1797,6 +1839,7 @@ static struct attribute *mp_attributes[] = {
 	&cluster1_min_freq.attr,
 	&cluster1_max_freq.attr,
 	&cluster1_volt_table.attr,
+	&cluster1_all_cores_max_freq.attr, /* 4 cores toggle */
 	&cluster0_freq_table.attr,
 	&cluster0_min_freq.attr,
 	&cluster0_max_freq.attr,
@@ -2566,6 +2609,8 @@ static int exynos_mp_cpufreq_parse_dt(struct device_node *np, cluster_type cl)
 		pr_info("%s: cpufreq_dt is not existed. \n", __func__);
 		return -ENODEV;
 	}
+/* added 4 cores toggles */
+	moro_np = np; /* end */
 
 	if (of_property_read_u32(np,(cl ? "cl1_idx_num" : "cl0_idx_num"),
 				&ptr->max_idx_num))
@@ -2609,8 +2654,19 @@ static int exynos_mp_cpufreq_parse_dt(struct device_node *np, cluster_type cl)
 #if defined(CONFIG_EXYNOS_BIG_FREQ_BOOST)
 		ptr->max_support_idx_table = kzalloc(sizeof(unsigned int)
 				* (NR_CLUST1_CPUS + 1), GFP_KERNEL);
-		ret = of_property_read_u32_array(np, "cl1_max_support_idx_table",
-				(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+//		ret = of_property_read_u32_array(np, "cl1_max_support_idx_table",
+//				(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+
+/* added 4 core toggle */
+		if (cluster1_all_cores) {
+			ret = of_property_read_u32_array(np, "cl1_full_max_support_idx_table",
+					(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+		} else {
+			ret = of_property_read_u32_array(np, "cl1_max_support_idx_table",
+					(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
+		}
+/* end */
+
 		if (ret < 0)
 			return -ENODEV;
 
