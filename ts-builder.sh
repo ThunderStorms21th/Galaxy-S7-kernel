@@ -3,7 +3,7 @@
 # Thanks to Tkkg1994 and djb77 for the script
 #
 # Thanks to MoRoGoku for the script
-# Kernel Build Script v1.9.1, modified by ThunderStorms Team
+# Kernel Build Script v2.2, modified by ThunderStorms Team
 #
 
 # SETUP
@@ -41,12 +41,14 @@ PAGE_SIZE=2048
 DTB_PADDING=0
 
 DEFCONFIG=ts-kernel_defconfig
+# DEFCONFIG=ts_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v2.1"
+export K_VERSION="v2.2"
 export K_BASE="S4ESC7"
-export K_NAME="ThundeRStormS-Kernel"
+# export K_NAME="ThundeRStormS-Ismir_Egal-EDITION-"
+export K_NAME="ThundeRStormS-Kernel-"
 export REVISION="RC"
 export KBUILD_BUILD_VERSION="1"
 S7DEVICE="OREO"
