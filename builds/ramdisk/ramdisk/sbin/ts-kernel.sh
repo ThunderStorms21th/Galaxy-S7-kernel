@@ -27,9 +27,27 @@ $RESETPROP ro.boot.verifiedbootstate "green"
 $RESETPROP ro.boot.flash.locked "1"
 $RESETPROP ro.boot.ddrinfo "00000001"
 
+# Stop services
+su -c "stop secure_storage"
+su -c "stop irisd"
+
 # SELinux (0 / 640 = Permissive, 1 / 644 = Enforcing)
 echo "0" > /sys/fs/selinux/enforce
 chmod 640 /sys/fs/selinux/enforce
+
+# SafetyNet
+chmod 440 /sys/fs/selinux/policy
+
+##KILL MEDIA
+if [ "`pgrep media`" ] && [ "`pgrep mediaserver`" ]; then
+busybox killall -9 android.process.media
+busybox killall -9 mediaserver
+busybox killall -9 com.google.android.gms
+busybox killall -9 com.google.android.gms.persistent
+busybox killall -9 com.google.process.gapps
+busybox killall -9 com.google.android.gsf
+busybox killall -9 com.google.android.gsf.persistent
+fi;
 
 # Google play services wakelock fix
 sleep 1
@@ -86,7 +104,7 @@ echo "234000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo "546000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 echo "624000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
 echo "50000 650000:30000 754000:30000 962000:30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "80000 624000:30000 1040000:30000 1248000:20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+echo "80000 624000:30000 1040000:25000 1248000:20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 echo "80 858000:85 1066000:90" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 echo "80 832000:85 1040000:88 1352000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 echo "97" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
@@ -134,6 +152,14 @@ echo "64" > /proc/sys/kernel/random/read_wakeup_threshold
 echo "500" > /proc/sys/vm/dirty_expire_centisecs
 echo "1000" > /proc/sys/vm/dirty_writeback_centisecs
 
+# ZRAM assigns size limit to virtual ram disk
+echo 3072M > /sys/block/zram0/disksize
+echo "1" > /sys/block/zram0/reset
+swapoff /dev/block/zram0 >/dev/null 2>&1
+for ZRAM in /dev/block/zram*; do
+    swapoff $ZRAM
+done;
+
 # CPU BOOST OFF
 echo "0" > /sys/module/cpu_boost/parameters/input_boost_enabled
 
@@ -145,8 +171,8 @@ echo "1" > /proc/sys/net/ipv4/tcp_sack
 echo "1" > /proc/sys/net/ipv4/tcp_tw_recycle
 echo "1" > /proc/sys/net/ipv4/tcp_window_scaling
 echo "5" > /proc/sys/net/ipv4/tcp_keepalive_probes
-echo "30" > /proc/sys/net/ipv4/tcp_keepalive_intvl
-echo "30" > /proc/sys/net/ipv4/tcp_fin_timeout
+echo "20" > /proc/sys/net/ipv4/tcp_keepalive_intvl
+echo "20" > /proc/sys/net/ipv4/tcp_fin_timeout
 echo "404480" > /proc/sys/net/core/wmem_max
 echo "404480" > /proc/sys/net/core/rmem_max
 echo "256960" > /proc/sys/net/core/rmem_default
