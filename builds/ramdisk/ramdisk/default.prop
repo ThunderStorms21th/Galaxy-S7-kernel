@@ -25,7 +25,6 @@ ro.dalvik.vm.native.bridge=0
 dalvik.vm.usejit=true
 dalvik.vm.usejitprofiles=true
 dalvik.vm.dexopt.secondary=true
-# dalvik.vm.appimageformat=lzo
 dalvik.vm.appimageformat=lz4
 pm.dexopt.first-boot=quicken
 pm.dexopt.boot=verify

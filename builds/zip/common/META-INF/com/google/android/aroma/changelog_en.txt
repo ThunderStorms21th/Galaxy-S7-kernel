@@ -2,8 +2,8 @@
 <b>KERNEL INFORMATION:</b>
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
-	VERSION	: <b><#selectbg_g>v2.2</#></b>
-	DATE	: <b><#selectbg_g>1/05/2019</#></b>
+	VERSION	: <b><#selectbg_g>v2.3</#></b>
+	DATE	: <b><#selectbg_g>13/05/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
@@ -12,7 +12,7 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-O v2.2 : 1.05.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-O v2.3 : 13.05.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXS4ESC7</*>
 <*>Support odexed, deodexed and ported roms</*>
@@ -31,7 +31,7 @@
 <*>Added Boeffla wakelocks blocker</*>
 <*>Added some CPU governors</*>
 <*>Added NEW CPU hotplugs : Alucard, ZEN Decision, AiO and
-   AutoSMP </*>
+   AutoSMP, CLUSTER </*>
    This is not full supported by MTWeaks for now, so You
    can see no full parameters to set. MTweaks will support
    it in the future.
@@ -42,12 +42,13 @@
 <*>Added OC GPU to 806 MHz</*>
 <*>ZRAM - default is turned OFF, file set max at 2.5GB</*>
 <*>Added lower values of CPU min freq's</*>
+<*>4 Big Cores toggle support</*>
 <*>3 Big cores down if screen is off</*>
 <*>Added Fingerprint Boost</*>
 <*>SELinux : permissive</*>
 <*>compiler : aarch64-linux-android-4.9</*>
 <*>Fix: No heat and no lags</*>
-<*>The rest like in previous version v2.1</*>
+<*>The rest like in previous version v2.2</*>
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v2.1 : 26.04.2019</#></b></u>

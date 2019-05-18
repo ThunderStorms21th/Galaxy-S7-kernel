@@ -37,14 +37,19 @@ if is_substring("G935", getprop("ro.boot.bootloader")) then
 	run_program("/tmp/ts/flash_kernel.sh", "G935");
 	ui_print("-- Done.");
 endif;
-	
+
 if is_substring("G930", getprop("ro.boot.bootloader")) then
 	ui_print("-- G930 S7 Flat...");
 	run_program("/tmp/ts/flash_kernel.sh", "G930");
 	ui_print("-- Done.");
 endif;
 
-
+# Run install script Flashing Kernel
+#	ui_print(" ");
+#	ui_print("@Flashing TW or AOSP kernel...");
+#	run_program("/tmp/ts/install_aosp.sh");
+#	ui_print("-- Done");
+	
 ui_print(" ");
 ui_print("@ThundeRStormS - System Patching...");
 package_extract_dir("ts/system", "/system");
@@ -89,7 +94,7 @@ endif;
 # Patch for deodexed and ported roms
 if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
 	
-	ui_print("@Patching system for ported and deodexed roms");
+	ui_print("@Patching system for ported and deodexed roms...");
 	ui_print(" ");
 	package_extract_dir("tsk", "/tmp/tsk");
 	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.1.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
@@ -127,6 +132,14 @@ set_metadata_recursive("/system/priv-app/PersonalPageService", "uid", 0, "gid", 
 
 set_metadata("/system/bin/logd", "uid", 1036, "gid", 1036, "mode", 0550, "capabilities", 0x440000040, "selabel", "u:object_r:logd_exec:s0");
 
+# INSTALL ADB
+# -----------
+	ui_print(" ");
+	ui_print("@ThunderStormS Installing ADB...");
+	package_extract_dir("ts/adb", "/tmp/adb");
+	run_program("/sbin/busybox", "unzip", "/tmp/adb/adb.zip", "META-INF/com/google/android/*", "-d", "/tmp/adb");
+	run_program("/sbin/sh", "/tmp/adb/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/adb/adb.zip");
+	delete_recursive("/tmp/adb");
 
 ####################################################
 # ROOT
