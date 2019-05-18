@@ -783,7 +783,7 @@ static ssize_t store_max77854_rgb_pattern(struct device *dev,
 
 	case CHARGING:
 		max77854_rgb_set_state(&max77854_rgb->led[RED], led_dynamic_current, LED_ALWAYS_ON);
-//		if (leds_control.noti_ramp_control == 1) {
+// LED FADE	if (leds_control.noti_ramp_control == 1) {
 //			max77854_rgb_ramp(dev, leds_control.noti_ramp_up, leds_control.noti_ramp_down);
 //			max77854_rgb_blink(dev, 500, 500);
 //			max77854_rgb_set_state(&max77854_rgb->led[RED], led_dynamic_current, LED_BLINK);

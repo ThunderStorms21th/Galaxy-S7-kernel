@@ -1691,6 +1691,10 @@ static int max77854_fg_get_property(struct power_supply *psy,
 		val->intval = data[1] << 8 | data[0];
 		pr_debug("%s: FilterCFG=0x%04X\n", __func__, data[1] << 8 | data[0]);
 		break;
+	case POWER_SUPPLY_PROP_CHARGE_COUNTER:
+		val->intval = (fuelgauge->battery_data->Capacity * fuelgauge->fg_resistor / 2) * fuelgauge->raw_capacity;
+		pr_info("%s: Remaining Capacity=%d uAh\n", __func__, val->intval);
+		break;
 #if defined(CONFIG_BATTERY_SBM_DATA)
 	case POWER_SUPPLY_PROP_MAX ... POWER_SUPPLY_EXT_PROP_MAX:
 		switch (ext_psp) {				

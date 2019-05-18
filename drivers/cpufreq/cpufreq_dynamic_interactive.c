@@ -92,14 +92,14 @@ static enum tune_values {
 	HIGH_PERF_TUNE
 } cur_tune_value;
 
-#define MIN_GO_HISPEED_LOAD 70
+#define MIN_GO_HISPEED_LOAD 80
 #define DEFAULT_LOW_POWER_RATE 10
 
 /* default number of sampling periods to average before hotplug-in decision */
 #define DEFAULT_SAMPLING_PERIODS 10
-#define DEFAULT_HI_PERF_THRESHOLD 80
+#define DEFAULT_HI_PERF_THRESHOLD 85
 #define DEFAULT_LOW_POWER_THRESHOLD 35
-#define MAX_MIN_SAMPLE_TIME (80 * USEC_PER_MSEC)
+#define MAX_MIN_SAMPLE_TIME (60 * USEC_PER_MSEC)
 
 /* Hi speed to bump to from lo speed when load burst (default max) */
 static u64 hispeed_freq;
@@ -110,20 +110,20 @@ static unsigned long go_hispeed_load;
 /*
  * The minimum amount of time to spend at a frequency before we can ramp down.
  */
-#define DEFAULT_MIN_SAMPLE_TIME (20 * USEC_PER_MSEC)
+#define DEFAULT_MIN_SAMPLE_TIME (40 * USEC_PER_MSEC)
 static unsigned long min_sample_time;
 
 /*
  * The sample rate of the timer used to increase frequency
  */
-#define DEFAULT_TIMER_RATE (20 * USEC_PER_MSEC)
+#define DEFAULT_TIMER_RATE (40 * USEC_PER_MSEC)
 static unsigned long timer_rate;
 
 /*
  * Wait this long before raising speed above hispeed, by default a single
  * timer interval.
  */
-#define DEFAULT_ABOVE_HISPEED_DELAY DEFAULT_TIMER_RATE
+#define DEFAULT_ABOVE_HISPEED_DELAY (DEFAULT_TIMER_RATE + 10000)
 static unsigned long above_hispeed_delay_val;
 
 /*
