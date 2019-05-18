@@ -45,7 +45,7 @@ DEFCONFIG=ts-kernel_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v2.2"
+export K_VERSION="v2.3"
 export K_BASE="S4ESC7"
 # export K_NAME="ThundeRStormS-Ismir_Egal-EDITION-"
 export K_NAME="ThundeRStormS-Kernel-"
