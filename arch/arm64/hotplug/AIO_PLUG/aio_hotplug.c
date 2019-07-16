@@ -1,7 +1,8 @@
-/* AiO HotPlug v2.0, an All in One HotPlug for Traditional Quad-Core SoCs and 
- * Hexa/Octa-Core big.LITTLE SoCs.
+/* AiO HotPlug v2.1, an All in One HotPlug for Traditional Quad-Core SoCs and 
+ * Hexa/Octa-Core big.LITTLE Samsung Exynos SoCs.
  *
  * Copyright (c) 2017, Shoaib Anwar <Shoaib0595@gmail.com>
+ * Copyright (c) 2019, @nalas & HN XDA
  *
  * Based on State_Helper HotPlug, by Pranav Vashi <neobuddy89@gmail.com>
  *
@@ -9,9 +10,10 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
+ * MODDED for Exynoss 8890 BY @nalas  & HN ThunderStormS Team
  */
 
-// Assume Quad-Core SoCs to be of Traditional Configuration and Hexa/Octa-Core SoCs to be of big.LITTLE Configuration.
+// Assume Quad-Core SoCs to be of Traditional Configuration and Hexa/Octa-Core SoCs to be of big.LITTLE Samsung Exynos Configuration.
 
 #include <linux/cpu.h>
 #include <linux/module.h>
@@ -30,7 +32,6 @@
       #define DEFAULT_BIG_CORES		4
       #define DEFAULT_LITTLE_CORES	4
 #endif
-
 
 static struct AiO_HotPlug {
        unsigned int toggle;
@@ -55,193 +56,174 @@ static struct workqueue_struct *AiO_wq;
 
 int AiO_HotPlug = AIO_TOGGLE;
 
-static void aio_online_cpus(unsigned int cpu)
-{
-	struct device *dev;
-	int ret;
-
-	lock_device_hotplug();
-	dev = get_cpu_device(cpu);
-	ret = device_online(dev);
-	if (ret < 0)
-		pr_info("%s: failed online cpu %d\n", __func__, cpu);
-	unlock_device_hotplug();
-}
-
-static void aio_offline_cpus(unsigned int cpu)
-{
-	struct device *dev;
-	int ret;
-
-	lock_device_hotplug();
-	dev = get_cpu_device(cpu);
-	ret = device_offline(dev);
-	if (ret < 0)
-		pr_info("%s: failed offline cpu %d\n", __func__, cpu);
-	unlock_device_hotplug();
-}
+#ifdef CONFIG_ALUCARD_HOTPLUG
+extern int alucard;
+#endif
 
 static void __ref AiO_HotPlug_work(struct work_struct *work)
 {
+	 #if (NR_CPUS == 6 || NR_CPUS == 8)
+         unsigned int max_big_core = AiO.big_cores;
+
+         #endif
+
          // Operations for a Traditional Quad-Core SoC.
          #if (NR_CPUS == 4)
 	     if (AiO.cores == 1)
 	     {	   
 	        if (cpu_online(3))
-	           aio_offline_cpus(3);
+	           cpu_down(3);
 	        if (cpu_online(2))
-	           aio_offline_cpus(2);
+	           cpu_down(2);
 	        if (cpu_online(1)) 
-                   aio_offline_cpus(1);
+                   cpu_down(1);
 	     }
 	     else if (AiO.cores == 2)
 	     {
 	   	     if (!cpu_online(1))
-	      	        aio_online_cpus(1);
-
+	      	        cpu_up(1);
+	   
 	   	     if (cpu_online(3))
-	                aio_offline_cpus(3);
+	                cpu_down(3);
 	   	     if (cpu_online(2))
-	                aio_offline_cpus(2);
+	                cpu_down(2);
 	     }
 	     else if (AiO.cores == 3)
 	     {
 	   	     if (!cpu_online(1))
-	      	        aio_online_cpus(1);
+	      	        cpu_up(1);
 	   	     if (!cpu_online(2))
-	      	        aio_online_cpus(2);
-
+	      	        cpu_up(2);
+	   
 	   	     if (cpu_online(3))
-	      	        aio_offline_cpus(3);
+	      	        cpu_down(3);
 	     }
 	     else if (AiO.cores == 4)
 	     {
 	           if (!cpu_online(1))
-	      	      aio_online_cpus(1);
+	      	      cpu_up(1);
 	           if (!cpu_online(2))
-	      	      aio_online_cpus(2);
+	      	      cpu_up(2);
 	           if (!cpu_online(3))
-	      	      aio_online_cpus(3);
+	      	      cpu_up(3);
 	     }
 	  // Operations for a big.LITTLE SoC.
 	  #elif (NR_CPUS == 6 || NR_CPUS == 8)
 	        // Operations for big Cluster.
-                if (AiO.big_cores == 0)
+		if (AiO.big_cores == 0)
+		{
+	   	   if (cpu_online(7))
+	      	      cpu_down(7);
+	   	   if (cpu_online(6))
+	      	      cpu_down(6);
+	  	   if (cpu_online(5)) 
+             	      cpu_down(5);
+	   	   if (cpu_online(4))
+	      	      cpu_down(4);
+		}
+                else if (AiO.big_cores == 1)
 	        {
-	           if (cpu_online(3))
-	              aio_offline_cpus(3);
-	   	   if (cpu_online(2))
-	      	      aio_offline_cpus(2);
-	   	   if (cpu_online(1)) 
-              	      aio_offline_cpus(1);
-	   	   if (cpu_online(0))
-	      	      aio_offline_cpus(0);
-	        }
-	        else if (AiO.big_cores == 1)
-	        {
-	                if (!cpu_online(0))
-	                   aio_online_cpus(0);
-
-	                if (cpu_online(3))
-	          	   aio_offline_cpus(3);
-	      	        if (cpu_online(2))
-	           	   aio_offline_cpus(2);
-	        	if (cpu_online(1)) 
-                   	   aio_offline_cpus(1);
+	                if (!cpu_online(4))
+	                   cpu_up(4);
+	        	if (cpu_online(5)) 
+                   	   cpu_down(5);
+	      	        if (cpu_online(6))
+	           	   cpu_down(6);
+	                if (cpu_online(7))
+	          	   cpu_down(7);
 		}
 		else if (AiO.big_cores == 2)
 		{
-	        	if (!cpu_online(0))
-	           	   aio_online_cpus(0);
-	   		if (!cpu_online(1))
-	      	   	   aio_online_cpus(1);
-
-	   		if (cpu_online(3))
-	           	   aio_offline_cpus(3);
-	   		if (cpu_online(2))
-	           	   aio_offline_cpus(2);
+	        	if (!cpu_online(4))
+	           	   cpu_up(4);
+	   		if (!cpu_online(5))
+	      	   	   cpu_up(5);
+	   		if (cpu_online(6))
+	           	   cpu_down(6);
+	   		if (cpu_online(7))
+	           	   cpu_down(7);
 		}
 		else if (AiO.big_cores == 3)
 		{
-	   		if (!cpu_online(0))
-	           	   aio_online_cpus(0);
-	   		if (!cpu_online(1))
-	      	   	   aio_online_cpus(1);
-	   		if (!cpu_online(2))
-	      	   	   aio_online_cpus(2);
-
-	   		if (cpu_online(3))
-	      	   	   aio_offline_cpus(3);
+	   		if (!cpu_online(4))
+	           	   cpu_up(4);
+	   		if (!cpu_online(5))
+	      	   	   cpu_up(5);
+	   		if (!cpu_online(6))
+	      	   	   cpu_up(6);
+	   
+	   		if (cpu_online(7))
+	      	   	   cpu_down(7);
 		}
 		else if (AiO.big_cores == 4)
 		{
-	   		if (!cpu_online(0))
-	      	   	   aio_online_cpus(0);
-	   		if (!cpu_online(1))
-	      	   	   aio_online_cpus(1);
-	   		if (!cpu_online(2))
-	      	   	   aio_online_cpus(2);
-	   		if (!cpu_online(3))
-	      	   	   aio_online_cpus(3);
+	   		if (!cpu_online(4))
+	      	   	   cpu_up(4);
+	   		if (!cpu_online(5))
+	      	   	   cpu_up(5);
+	   		if (!cpu_online(6))
+	      	   	   cpu_up(6);
+	   		if (!cpu_online(7))
+	      	   	   cpu_up(7);
 		}
 		// Operations for LITTLE Cluster.
 		if (AiO.LITTLE_cores == 0)
 		{
-	   	   if (cpu_online(7))
-	      	      aio_offline_cpus(7);
-	   	   if (cpu_online(6))
-	      	      aio_offline_cpus(6);
-	  	   if (cpu_online(5)) 
-             	      aio_offline_cpus(5);
-	   	   if (cpu_online(4))
-	      	      aio_offline_cpus(4);
+	   	   if (cpu_online(3))
+	      	      cpu_down(3);
+	   	   if (cpu_online(2))
+	      	      cpu_down(2);
+	  	   if (cpu_online(1)) 
+             	      cpu_down(1);
+	   	   if (cpu_online(0))
+	      	      cpu_down(0);
 		}
 		else if (AiO.LITTLE_cores == 1)
 		{
-	   		if (!cpu_online(4))
-	      	   	   aio_online_cpus(4);
-
-	   		if (cpu_online(7))
-	      	   	   aio_offline_cpus(7);
-	   		if (cpu_online(6))
-	      	   	   aio_offline_cpus(6);
-	   		if (cpu_online(5)) 
-              	   	   aio_offline_cpus(5);
+	   		if (!cpu_online(0))
+	      	   	   cpu_up(0);
+	   
+	   		if (cpu_online(3))
+	      	   	   cpu_down(3);
+	   		if (cpu_online(2))
+	      	   	   cpu_down(2);
+	   		if (cpu_online(1)) 
+              	   	   cpu_down(1);
 		}
 		else if (AiO.LITTLE_cores == 2)
 		{
-	   		if (!cpu_online(4))
-	           	   aio_online_cpus(4);
-	   		if (!cpu_online(5))
-	           	   aio_online_cpus(5);
-
-	   		if (cpu_online(7))
-	      	   	   aio_offline_cpus(7);
-	   		if (cpu_online(6))
-	                   aio_offline_cpus(6);
+	   		if (!cpu_online(0))
+	           	   cpu_up(0);
+	   		if (!cpu_online(1))
+	           	   cpu_up(1);
+	   
+	   		if (cpu_online(3))
+	      	   	   cpu_down(3);
+	   		if (cpu_online(2))
+	                   cpu_down(2);
 		}
 		else if (AiO.LITTLE_cores == 3)
 		{
-	   		if (!cpu_online(4))
-	      	   	   aio_online_cpus(4);
-	   		if (!cpu_online(5))
-	      	   	   aio_online_cpus(5);
-	   		if (!cpu_online(6))
-	      	   	   aio_online_cpus(6);
-
-	   		if (cpu_online(7))
-	      	  	   aio_offline_cpus(7);
+	   		if (!cpu_online(0))
+	      	   	   cpu_up(0);
+	   		if (!cpu_online(1))
+	      	   	   cpu_up(1);
+	   		if (!cpu_online(2))
+	      	   	   cpu_up(2);
+	   
+	   		if (cpu_online(3))
+	      	  	   cpu_down(3);
 		}
 		else if (AiO.LITTLE_cores == 4)
 		{
-	  		if (!cpu_online(4))
-	           	   aio_online_cpus(4);
-	   		if (!cpu_online(5))
-	           	   aio_online_cpus(5);
-	   		if (!cpu_online(6))
-	           	   aio_online_cpus(6);
-	   		if (!cpu_online(7))
-	           	   aio_online_cpus(7);
+	  		if (!cpu_online(0))
+	           	   cpu_up(0);
+	   		if (!cpu_online(1))
+	           	   cpu_up(1);
+	   		if (!cpu_online(2))
+	           	   cpu_up(2);
+	   		if (!cpu_online(3))
+	           	   cpu_up(3);
                 }
           #endif
 
@@ -286,7 +268,7 @@ static void __ref AiO_HotPlug_stop(void)
 	/* Wake-Up All the Cores */
 	for_each_possible_cpu(cpu) {
 	    if (!cpu_online(cpu))
-	       aio_online_cpus(cpu);
+	       cpu_up(cpu);
 	}
 }
 
@@ -301,6 +283,10 @@ static ssize_t show_toggle(struct kobject *kobj,
 #ifdef CONFIG_ASMP
 extern int asmp_enabled __read_mostly;
 #endif
+#ifdef CONFIG_ASMPTS
+extern int asmp_enabled __read_mostly;
+#endif
+
 static ssize_t store_toggle(struct kobject *kobj,
 			     struct kobj_attribute *attr,
 			     const char *buf, size_t count)
@@ -312,10 +298,21 @@ static ssize_t store_toggle(struct kobject *kobj,
 	if (ret != 1 || val < 0 || val > 1)
 	   return -EINVAL;
 
+#ifdef CONFIG_ALUCARD_HOTPLUG
+	if (alucard)
+	   return -EINVAL; 
+#endif
+
 	if (val == AiO.toggle)
 	   return count;
 
 #ifdef CONFIG_ASMP
+	if (asmp_enabled) {
+		pr_info(AIO_HOTPLUG" You can't enable more than 1 hotplug!\n");
+		return count;
+	}
+#endif
+#ifdef CONFIG_ASMPTS
 	if (asmp_enabled) {
 		pr_info(AIO_HOTPLUG" You can't enable more than 1 hotplug!\n");
 		return count;
@@ -329,12 +326,14 @@ static ssize_t store_toggle(struct kobject *kobj,
 #ifdef CONFIG_SCHED_CORE_CTL
 	   disable_core_control(true);
 #endif
+
 	   AiO_HotPlug_start();
 	} else {
 	   AiO_HotPlug_stop();
 #ifdef CONFIG_SCHED_CORE_CTL
 	   disable_core_control(false);
 #endif
+
 	}
 	return count;
 }
@@ -354,7 +353,7 @@ static ssize_t store_cores(struct kobject *kobj,
 	unsigned int val;
 
 	ret = sscanf(buf, "%u", &val);
-
+	
 	if (ret != 1 || val < 1 || val > 4)
 	   return -EINVAL;
 
@@ -386,8 +385,8 @@ static ssize_t store_big_cores(struct kobject *kobj,
 	}
 	else if (NR_CPUS == 8)
 	{
-		if (ret != 1 || val < 0 || val > 4 || (val == 0 && AiO.LITTLE_cores == 0))
-	           return -EINVAL;
+	   if (ret != 1 || val < 0 || val > 4 || (val == 0 && AiO.LITTLE_cores == 0))
+	      return -EINVAL;
 	}
 
 	AiO.big_cores = val;
@@ -410,8 +409,9 @@ static ssize_t store_LITTLE_cores(struct kobject *kobj,
 	unsigned int val;
 
 	ret = sscanf(buf, "%u", &val);
-
+	
 	if (ret != 1 || val < 0 || val > 4 || (val == 0 && AiO.big_cores == 0))
+//	if (ret != 1 || val < 1 || val > 4 || (val == 0 && AiO.big_cores == 0))
 	   return -EINVAL;
 
 	AiO.LITTLE_cores = val;
@@ -519,6 +519,8 @@ static void __exit AiO_HotPlug_exit(void)
 late_initcall(AiO_HotPlug_init);
 module_exit(AiO_HotPlug_exit);
 
-MODULE_AUTHOR("Shoaib Anwar <Shoaib0595@gmail.com>");
-MODULE_DESCRIPTION("AiO HotPlug v2.0, an All in One HotPlug for Traditional Quad-Core SoCs and Hexa-Core and Octa-Core big.LITTLE SoCs.");
+// MODULE_AUTHOR("Shoaib Anwar <Shoaib0595@gmail.com>");
+MODULE_AUTHOR("@nalas XDA");
+// MODULE_DESCRIPTION("AiO HotPlug v2.0, an All in One HotPlug for Traditional Quad-Core SoCs and Hexa-Core and Octa-Core big.LITTLE SoCs.");
+MODULE_DESCRIPTION("AiO HotPlug v2.1, an All in One HotPlug for Traditional Quad-Core SoCs and Hexa-Core and Octa-Core big.LITTLE Samsung Exynos SoCs.");
 MODULE_LICENSE("GPLv2");

@@ -62,7 +62,7 @@
 		max_trigger_level = <8>;
 		non_hw_trigger_levels = <7>;
 
-		/* Throttling Level for big CPU*/
+		/* Throttling Level */
 		trigger_levels_0 = <66>;
 		trigger_levels_1 = <71>;
 		trigger_levels_2 = <76>;
@@ -92,12 +92,9 @@
 
 		freq_tab_count = <3>;
 
-		freq_clip_max_0 = <1352000>;
-		freq_clip_max_1 = <936000>;
-		freq_clip_max_2 = <728000>;
-/*		freq_clip_max_0 = <1560000>;
+		freq_clip_max_0 = <1560000>;
 		freq_clip_max_1 = <1040000>;
-		freq_clip_max_2 = <728000>; */
+		freq_clip_max_2 = <728000>;
 
 		cooling_level_0 = <66>;
 		cooling_level_1 = <71>;
@@ -115,7 +112,7 @@
 		max_trigger_level = <8>;
 		non_hw_trigger_levels = <7>;
 
-		/* Throttling Level for little CPU*/
+		/* Throttling Level */
 		trigger_levels_0 = <66>;
 		trigger_levels_1 = <76>;
 		trigger_levels_2 = <81>;
@@ -145,13 +142,11 @@
 
 		freq_tab_count = <4>;
 
-		freq_clip_max_0 = <1066000>;
-		freq_clip_max_1 = <962000>;
-		freq_clip_max_2 = <754000>;
-/*	oryg	freq_clip_max_0 = <1274000>;
+		freq_clip_max_0 = <1274000>;
 		freq_clip_max_1 = <1170000>;
-		freq_clip_max_2 = <962000>; */
+		freq_clip_max_2 = <962000>;
 		freq_clip_max_3 = <442000>;
+
 		cooling_level_0 = <66>;
 		cooling_level_1 = <76>;
 		cooling_level_2 = <81>;
@@ -165,7 +160,7 @@
 		max_trigger_level = <8>;
 		non_hw_trigger_levels = <7>;
 
-		/* Throttling Level for GPU*/
+		/* Throttling Level */
 		trigger_levels_0 = <66>;
 		trigger_levels_1 = <71>;
 		trigger_levels_2 = <76>;
@@ -196,12 +191,9 @@
 		freq_tab_count = <6>;
 
 		freq_clip_max_0 = <600000>;
-		freq_clip_max_1 = <546000>;
-		freq_clip_max_2 = <419000>;
-		freq_clip_max_3 = <338000>;
-/*	oryg	freq_clip_max_1 = <600000>;
+		freq_clip_max_1 = <600000>;
 		freq_clip_max_2 = <546000>;
-		freq_clip_max_3 = <419000>; */
+		freq_clip_max_3 = <419000>;
 		freq_clip_max_4 = <260000>;
 		freq_clip_max_5 = <260000>;
 

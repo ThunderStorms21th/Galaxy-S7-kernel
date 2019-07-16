@@ -46,6 +46,11 @@ struct hotplug_cpuinfo {
 	unsigned int cur_down_rate;
 };
 
+#ifdef CONFIG_AiO_HotPlug
+extern int AiO_HotPlug;
+#endif
+int alucard;
+
 static DEFINE_PER_CPU(struct hotplug_cpuinfo, od_hotplug_cpuinfo);
 
 static struct workqueue_struct *alucardhp_wq;
@@ -67,15 +72,15 @@ static struct hotplug_tuners {
 	struct mutex alu_hotplug_mutex;
 #endif
 } hotplug_tuners_ins = {
-	.hotplug_sampling_rate = 30,
+	.hotplug_sampling_rate = 50,
 #ifdef CONFIG_MACH_JF
 	.hotplug_enable = 0,
 #else
 	.hotplug_enable = 0,
 #endif
-	.min_cpus_online = 1,
+	.min_cpus_online = 2,
 	.maxcoreslimit = NR_CPUS,
-	.maxcoreslimit_sleep = 1,
+	.maxcoreslimit_sleep = 0,
 	.hp_io_is_busy = 0,
 #if defined(CONFIG_POWERSUSPEND) || \
 	defined(CONFIG_HAS_EARLYSUSPEND)
@@ -634,6 +639,11 @@ static ssize_t store_hotplug_enable(struct kobject *a, struct attribute *b,
 	ret = sscanf(buf, "%u", &input);
 	if (ret != 1)
 		return -EINVAL;
+
+#ifdef CONFIG_AiO_HotPlug
+	if (AiO_HotPlug)
+		return -EINVAL;	
+#endif
 
 	input = input > 0;
 

@@ -27,7 +27,7 @@
 #define MSM_SLEEPER_DEBUG		0
 #define DELAY				HZ
 #define DEF_UP_THRESHOLD		80
-#define DEF_MAX_ONLINE			4
+#define DEF_MAX_ONLINE			8
 #define DEF_DOWN_COUNT_MAX		10 /* 1 sec */
 #define DEF_UP_COUNT_MAX		4 /* 0.4 sec */
 #define DEF_SUSPEND_MAX_ONLINE		2
@@ -348,12 +348,12 @@ static ssize_t store_down_count_max(struct device *dev,
 	return count;
 }
 
-static DEVICE_ATTR(enabled, 644, show_enable_hotplug, store_enable_hotplug);
-static DEVICE_ATTR(up_threshold, 644, show_up_threshold, store_up_threshold);
-static DEVICE_ATTR(max_online, 644, show_max_online, store_max_online);
-static DEVICE_ATTR(suspend_max_online, 644, show_suspend_max_online, store_suspend_max_online);
-static DEVICE_ATTR(up_count_max, 644, show_up_count_max, store_up_count_max);
-static DEVICE_ATTR(down_count_max, 644, show_down_count_max, store_down_count_max);
+static DEVICE_ATTR(enabled, 0644, show_enable_hotplug, store_enable_hotplug);
+static DEVICE_ATTR(up_threshold, 0644, show_up_threshold, store_up_threshold);
+static DEVICE_ATTR(max_online, 0644, show_max_online, store_max_online);
+static DEVICE_ATTR(suspend_max_online, 0644, show_suspend_max_online, store_suspend_max_online);
+static DEVICE_ATTR(up_count_max, 0644, show_up_count_max, store_up_count_max);
+static DEVICE_ATTR(down_count_max, 0644, show_down_count_max, store_down_count_max);
 
 static struct attribute *msm_sleeper_attrs[] = {
 	&dev_attr_up_threshold.attr,

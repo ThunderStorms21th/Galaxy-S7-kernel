@@ -34,7 +34,7 @@
 #define DEFAULT_LOAD_THRESHOLD 80
 #define DEFAULT_HIGH_LOAD_COUNTER 10
 #define DEFAULT_MAX_LOAD_COUNTER 20
-#define DEFAULT_CPUFREQ_UNPLUG_LIMIT 1267200
+#define DEFAULT_CPUFREQ_UNPLUG_LIMIT 416000
 #define DEFAULT_MIN_TIME_CPU_ONLINE 1
 #define DEFAULT_TIMER 1
 
@@ -103,7 +103,8 @@ static inline void cpus_online_work(void)
 {
 	unsigned int cpu;
 
-	for (cpu = 2; cpu < 4; cpu++) {
+//	for (cpu = 2; cpu < 4; cpu++) {
+	for (cpu = 2; cpu < 8; cpu++) {
 		if (cpu_is_offline(cpu))
 			cpu_up(cpu);
 	}
@@ -135,7 +136,8 @@ static inline bool cpus_cpufreq_work(void)
 			return false;
 	}
 
-	for (cpu = 2; cpu < 4; cpu++)
+//	for (cpu = 2; cpu < 4; cpu++)
+	for (cpu = 2; cpu < 8; cpu++)
 		current_freq += cpufreq_quick_get(cpu);
 
 	current_freq >>= 1;
