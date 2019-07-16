@@ -2,7 +2,6 @@
 
 # Set first parameter to profile
 profile=$1
-profiles=/data/property/persist.spectrum.profile
 
 # Function to apply ramdisk style settings
 function write() {

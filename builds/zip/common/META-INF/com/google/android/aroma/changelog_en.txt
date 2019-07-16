@@ -3,7 +3,7 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
 	VERSION	: <b><#selectbg_g>v2.3</#></b>
-	DATE	: <b><#selectbg_g>13/05/2019</#></b>
+	DATE	: <b><#selectbg_g>14/07/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
@@ -12,7 +12,60 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-O v2.3 : 13.05.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-O-v2.3 : 14.07.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU5ESD2</*>
+<*>Support odexed / deodexed roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>ThunderTweaks 1.0.3</*>
+<*>Camera Samsung fix by MoroGoku</*>
+<*>Added Archpower support - default is off</*>
+<*>Added Dynamic Fsync and Powersuspend</*>
+<*>Magisk 19.3 official</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.91 Samsung</*>
+<*>CPU big : 2600/208 MHZ</*>
+<*>CPU little : 1586/130 MHZ</*>
+<*>Added Fingerprint Boost - default is off</*>
+<*>Added Input Boost CPU - default is off</*>
+<*>Added NEW I/O schedulers : MAPLE & ANXIETY</*>
+<*>Added NEW CPU governors and some updates</*>
+<*>Added NEW TWRP recovery v3.3.0-0 by AJ's</*>
+<*>Added NEW CPU hotplugs : Alucard, ZEN Decision, AiO
+ and AutoSMP, CLUSTER, BLU, Intelli, Fast, Thunderbolt,
+ Mako,Lazy, MSM, MSM Sleeper</*>
+   This is not full supported by MTWeaks for now, so You
+   can see no full parameters to set. MTweaks will support
+   it in the future.
+   For now MSM, MSM Sleeper, Lazy and Intelli plugs are
+   not stable so they are disabled.
+<*>Added Fingerprint Boost - default OFF</*>
+   This is not full supported by MTWeaks for now, so You
+   can see no parameters to set. MTweaks will support it
+   in the future.
+<*>Fixed bug in AutoSMP and AiO hotplug for Exynos 8890</*>
+<*>LED control with FADE</*>
+<*>IRIS service off</*>
+<*>Support 10 Spectrum Profiles</*>
+<*>Updated Moro Sound to v2.1.1</*>
+<*>Added TTL support for IP</*>
+<*>Added Fingerprint Boost default ON</*>
+<*>VNSwap - default is turned ON.</*>
+<*>VNSwap - added script for disable it in Aroma.</*>
+<*>ZRAM - default is turned OFF, file set max at 4.0GB</*>
+   Now ZRAM is editable via script in Init.d folder.
+<*>3 cores down if screen is off</*>
+<*>No load high freq CPU is usage is lower then 5%</*>
+<*>Support Gestures to Weakup</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>Fix for SCSI drivers and maybe deepsleep drain</*>
+<*>Rest like in TS-OREO v2.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v2.2 : 1.05.2019</#></b></u>
 <*>Samsung sources G930FXXU3ERL3</*>
 <*>Samsung ramdisk G930FXXS4ESC7</*>
 <*>Support odexed, deodexed and ported roms</*>
@@ -48,7 +101,7 @@
 <*>SELinux : permissive</*>
 <*>compiler : aarch64-linux-android-4.9</*>
 <*>Fix: No heat and no lags</*>
-<*>The rest like in previous version v2.2</*>
+<*>The rest like in previous version v2.1</*>
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-O v2.1 : 26.04.2019</#></b></u>

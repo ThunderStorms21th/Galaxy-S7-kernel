@@ -10,17 +10,17 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 85
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "30000"
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "40000"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 10000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 754000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 962000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 10000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 105000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 50000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode 0
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -30,7 +30,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index 0
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 1000000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 40000
 
    # Big CPU
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
@@ -39,21 +39,20 @@
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 416000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2600000
-   chmod 0444 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 85
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "30000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "40000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 10000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 1040000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 1144000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 10000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "75"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 90000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 60000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode 0
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
@@ -63,10 +62,22 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/param_index
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/param_index 0
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 1000000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 40000
 
    # CPU HOTPLUG
    write /sys/power/cpuhotplug/enabled 1
+   write /sys/module/autosmp/parameters/enabled N
+   write /sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster1_all_cores_max_freq 1
+   write /sys/module/workqueue/parameters/power_efficient N
+
+   # Samsung Hotplug settings
+   chmod 0664 /sys/power/cpuhotplug/max_online_cpu
+   write /sys/power/cpuhotplug/max_online_cpu 8
+   chmod 0664 /sys/power/cpuhotplug/min_online_cpu
+   write /sys/power/cpuhotplug/min_online_cpu 1
+
+   # FINGERPRINT BOOST
+   write /sys/kernel/fp_boost/enabled 1
 
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
@@ -85,7 +96,7 @@
 
    # GPU
    chmod 0664 /sys/devices/14ac0000.mali/max_clock
-   write /sys/devices/14ac0000.mali/max_clock 650
+   write /sys/devices/14ac0000.mali/max_clock 702
    chmod 0664 /sys/devices/14ac0000.mali/min_clock
    write /sys/devices/14ac0000.mali/min_clock 260
    chmod 0664 /sys/devices/14ac0000.mali/power_policy
@@ -95,7 +106,7 @@
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_clock
    write /sys/devices/14ac0000.mali/highspeed_clock 419
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_load
-   write /sys/devices/14ac0000.mali/highspeed_load 92
+   write /sys/devices/14ac0000.mali/highspeed_load 93
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_delay
    write /sys/devices/14ac0000.mali/highspeed_delay 1
 
@@ -104,8 +115,8 @@
    write /sys/block/sda/queue/read_ahead_kb 1024
    write /sys/block/mmcblk0/queue/scheduler zen
    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-   write /sys/block/sda/queue/rq_affinity 2
-   write /sys/block/mmcblk0/queue/rq_affinity 2
+   write /sys/block/sda/queue/rq_affinity 1
+   write /sys/block/mmcblk0/queue/rq_affinity 1
    write /sys/block/sda/queue/nr_requests 512
    write /sys/block/mmcblk0/queue/nr_requests 512
 
@@ -123,12 +134,15 @@
    write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
    write /sys/kernel/sched/gentle_fair_sleepers 0
    write /sys/kernel/sched/arch_power 0
-   write /sys/kernel/power_suspend/power_suspend_mode 2
+   write /sys/kernel/power_suspend/power_suspend_mode 3
    write /proc/sys/net/ipv4/tcp_congestion_control westwood
 
    # SWAP
-   write /proc/sys/vm/swappiness 120
+   write /proc/sys/vm/swappiness 150
+   write /proc/sys/vm/vfs_cache_pressure 100
 
    # LMK
    write /sys/module/lowmemorykiller/parameters/minfree "20432,26040,32648,42256,59064,101152"
+
+
 

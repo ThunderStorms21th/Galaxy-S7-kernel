@@ -10,7 +10,7 @@ set_progress(0.01);
 
 # Copy scripts
 package_extract_dir("ts", "/tmp/ts");
-package_extract_dir("ts", "/tmp/tsk");
+package_extract_dir("tsk", "/tmp/tsk");
 set_perm_recursive(0, 0, 0777, 0777, "/tmp/ts");
 set_perm_recursive(0, 0, 0777, 0777, "/tmp/tsk");
 
@@ -91,6 +91,15 @@ if file_getprop("/tmp/aroma/menu.prop", "chk6") == "1" then
 	package_extract_dir("ts/profiles", "/storage/emulated/0/Spectrum/profiles/");
 endif;
 
+# TS swap off
+if file_getprop("/tmp/aroma/menu.prop", "chk4") == "1" then
+	ui_print(" ");
+	ui_print("@Installing ThundeRStormS VNSWAP OFF...");
+	package_extract_dir("ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("/tmp/ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("ts/system1", "/system");
+endif;
+
 # Patch for deodexed and ported roms
 if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
 	
@@ -131,15 +140,6 @@ set_metadata("/system/vendor/lib64/egl/libGLES_mali.so", "uid", 0, "gid", 2000, 
 set_metadata_recursive("/system/priv-app/PersonalPageService", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 
 set_metadata("/system/bin/logd", "uid", 1036, "gid", 1036, "mode", 0550, "capabilities", 0x440000040, "selabel", "u:object_r:logd_exec:s0");
-
-# INSTALL ADB
-# -----------
-	ui_print(" ");
-	ui_print("@ThunderStormS Installing ADB...");
-	package_extract_dir("ts/adb", "/tmp/adb");
-	run_program("/sbin/busybox", "unzip", "/tmp/adb/adb.zip", "META-INF/com/google/android/*", "-d", "/tmp/adb");
-	run_program("/sbin/sh", "/tmp/adb/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/adb/adb.zip");
-	delete_recursive("/tmp/adb");
 
 ####################################################
 # ROOT

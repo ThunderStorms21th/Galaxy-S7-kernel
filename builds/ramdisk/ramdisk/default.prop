@@ -5,6 +5,7 @@ persist.security.ams.enforcing=0
 ro.oem_unlock_supported=1
 ro.secure=0
 security.perf_harden=1
+# was 0 adb secure
 ro.adb.secure=0
 ro.allow.mock.location=0
 ro.debuggable=1
@@ -12,6 +13,8 @@ persist.sys.usb.config=mtp,adb
 persist.service.adb.enable=1
 persist.service.debuggable=1
 persist.adb.notify=0
+persist.mtp.notify=0
+persist.usb.notify=0
 ro.zygote=zygote64_32
 ro.telephony.default_network=9
 ro.supportmodel.mptcp=1
@@ -46,6 +49,6 @@ wlan.wfd.hdcp=disable
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Tue Feb 12 00:17:52 KST 2019
-ro.bootimage.build.date.utc=1549898272
-ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXS4ESBB:user/test-keys
+ro.bootimage.build.date=Mon Apr 22 08:48:48 KST 2019
+ro.bootimage.build.date.utc=1555890528
+ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXU5ESD2:user/test-keys
