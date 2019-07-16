@@ -23,7 +23,7 @@
 #define CPU_MASK(cpu) (1U << (cpu))
 
 /*
- * For MSM8994 (big.LITTLE). CPU0-3 are LITTLE CPUs; CPU4-7 are
+ * For Exynos 8890 (big.LITTLE). CPU0-3 are LITTLE CPUs; CPU4-7 are
  * big CPUs.
  */
 #define LITTLE_CPU_MASK (CPU_MASK(0) | CPU_MASK(1) | CPU_MASK(2) | CPU_MASK(3))
@@ -104,7 +104,9 @@ static bool validate_cpu_freq(unsigned int cpu, uint32_t *freq);
 
 static struct notifier_block notif;
 
-/* static inline bool cpufreq_next_valid(struct cpufreq_frequency_table **pos)
+// was disable is cpufreq.h in Include/Linux/
+/*
+static inline bool cpufreq_next_valid(struct cpufreq_frequency_table **pos)
 {
 	while ((*pos)->frequency != CPUFREQ_TABLE_END)
 		if ((*pos)->frequency != CPUFREQ_ENTRY_INVALID)
@@ -113,6 +115,7 @@ static struct notifier_block notif;
 			(*pos)++;
 	return false;
 } */
+// was disabled
 
 static void ib_boost_main(struct work_struct *work)
 {
@@ -284,9 +287,10 @@ static int do_cpu_boost(struct notifier_block *nb,
 		if (ret)
 			set_boost_freq(b, policy->cpu, boost_freq);
 		policy->min = min(policy->max, boost_freq);
-	} else {
-		policy->min = policy->cpuinfo.min_freq;
 	}
+//	} else {
+//		policy->min = policy->cpuinfo.min_freq;
+//	}
 
 	return NOTIFY_OK;
 }
