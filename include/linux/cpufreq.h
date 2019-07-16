@@ -171,10 +171,15 @@ void cpufreq_sysfs_remove_file(const struct attribute *attr);
 int cpufreq_sysfs_create_group(const struct attribute_group *attr_grp);
 void cpufreq_sysfs_remove_group(const struct attribute_group *attr_grp);
 
+// added Adaptative
+extern int __cpufreq_driver_getavg(struct cpufreq_policy *policy,
+				   unsigned int cpu); // end
+
 #ifdef CONFIG_CPU_FREQ
 unsigned int cpufreq_get(unsigned int cpu);
 unsigned int cpufreq_quick_get(unsigned int cpu);
 unsigned int cpufreq_quick_get_max(unsigned int cpu);
+unsigned int cpufreq_quick_get_util(unsigned int cpu);	// added for BLU Hotplug
 void disable_cpufreq(void);
 
 u64 get_cpu_idle_time(unsigned int cpu, u64 *wall, int io_busy);
@@ -287,6 +292,9 @@ struct cpufreq_driver {
 
 	/* optional */
 	int	(*bios_limit)	(int cpu, unsigned int *limit);
+
+	unsigned int (*getavg)	(struct cpufreq_policy *policy,
+				 unsigned int cpu); // added ADAPTATIVE
 
 	int	(*exit)		(struct cpufreq_policy *policy);
 	void	(*stop_cpu)	(struct cpufreq_policy *policy);
@@ -521,6 +529,9 @@ extern unsigned int cpufreq_interactive_get_hispeed_freq(int cpu);
 extern unsigned int cpufreq_cafactive_get_hispeed_freq(int cpu);
 extern void cafactive_boost_ondemand(int cpu, s64 miliseconds, bool static_switch);
 #endif
+#ifdef CONFIG_CPU_FREQ_GOV_THUNDERSTORM
+extern unsigned int cpufreq_thunderstorm_get_hispeed_freq(int cpu);
+#endif
 #ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE
 #define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_performance)
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_ALUCARD)
@@ -619,6 +630,9 @@ extern struct cpufreq_governor cpufreq_gov_smartmax;
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_SMARTMAX_EPS)
 extern struct cpufreq_governor cpufreq_gov_smartmax_eps;
 #define CPUFREQ_DEFAULT_GOVERNOR        (&cpufreq_gov_smartmax_eps)
+#elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_THUNDERSTORM)
+extern struct cpufreq_governor cpufreq_gov_thunderstorm;
+#define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_thunderstorm)
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_THUNDERX)
 extern struct cpufreq_governor cpufreq_gov_thunderx;
 #define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_thunderx)

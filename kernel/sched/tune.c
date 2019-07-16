@@ -12,7 +12,6 @@
 #include "tune.h"
 
 #ifdef CONFIG_CGROUP_SCHEDTUNE
-/* static bool schedtune_initialized = true; */
 static bool schedtune_initialized = false;
 #endif
 
